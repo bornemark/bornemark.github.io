@@ -1,0 +1,35 @@
+{
+  "name": "bornemark-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.8",
+    "styled-components": "^4.1.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-config-equimper": "*",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-prettier": "^3.0.0",
+    "eslint-plugin-react": "^7.10.0",
+    "prettier": "^1.14.3"
+  },
+  "proxy": "http://127.0.0.1:3333"
+}
