@@ -1,44 +1,26 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import React from 'react'
 import Card from '../components/Card'
 import Spinner from '../components/Spinner/Spinner'
-import H1 from '../components/H1'
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 2rem;
-`
+import H1 from '../components/primitives/H1'
+import Grid from '../components/primitives/Grid'
+import useFetch from '../hooks/useFetch'
 
 export default function MixtapesPage() {
-  const [isFetching, setIsFetching] = useState(true)
-  const [mixtapes, setMixtapes] = useState([])
-
-  useEffect(() => {
-    const fetchMixtapes = async () => {
-      setIsFetching(true)
-      const data = await fetch('/api/mixtapes')
-      const json = await data.json()
-      setMixtapes(json)
-      setIsFetching(false)
-    }
-
-    fetchMixtapes()
-  }, [])
-
-  if (isFetching) {
-    return <Spinner />
-  }
+  const [mixtapes, loading] = useFetch('/api/mixtapes')
 
   return (
     <>
       <H1>Mixtapes</H1>
 
-      <Grid>
-        {mixtapes.map(m => (
-          <Card key={m.id} item={m} />
-        ))}
-      </Grid>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Grid>
+          {mixtapes.map(m => (
+            <Card key={m.id} item={m} />
+          ))}
+        </Grid>
+      )}
     </>
   )
 }

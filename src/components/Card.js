@@ -1,75 +1,121 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import YouTube from 'react-youtube'
+import Transition from 'react-transition-group/Transition'
+import { Download as DownloadIcon } from 'styled-icons/feather/Download'
 import vars from '../styles/vars'
 
-const StyledCard = styled.figure`
-  position: relative;
-  cursor: pointer;
-  box-shadow: ${vars.shadows.default};
-  height: 13rem;
-  overflow: hidden;
-  color: ${vars.colors.white};
-  margin: 0;
-`
+const appearDuration = 250
 
-const Image = styled.img`
-  border: 0;
-  width: 100%;
-  transition: transform 0.15s ease-out;
-  opacity: 0.85;
-
-  &:hover {
-    transform: scale(1.065) rotate(3deg);
-  }
-`
-
-const Text = styled.figcaption`
-  pointer-events: none;
+const Container = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  padding: 1rem 1.5rem;
-  /* z-index: 1; */
-  background-image: -webkit-linear-gradient(bottom, rgba(0, 0, 0, 0.5) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity ${appearDuration}ms ease-in-out;
+`
+
+const Header = styled.header`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: nowrap;
+  padding: 0 0.2rem;
+  margin-bottom: 1rem;
+  color: ${vars.colors.white};
 `
 
 const Title = styled.h1`
-  font-size: 1.7em;
-  line-height: 1.7rem;
-  height: 1.9rem;
+  font-size: 1.55em;
+  line-height: 0.9;
   margin: 0;
-`
-
-const CreatedDate = styled.h5`
-  position: absolute;
-  right: 1.5rem;
-  bottom: 1rem;
   font-weight: normal;
+`
+
+const Footer = styled.figcaption`
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 1.3rem;
+  padding: 0 0.35rem;
+  margin-top: 2px;
+  transition: color 0.15s ease-in;
+  color: ${props => (props.isMouseOver ? vars.colors.white : vars.colors.gray)};
+`
+
+const FooterText = styled.p`
+  font-size: 0.9em;
   margin: 0;
 `
 
-const Body = styled.p`
-  font-size: 1em;
+const DownloadButton = styled.a`
+  height: 1.3rem;
+  color: inherit;
 `
 
-const YoutubeEmbed = styled.div``
+const StyledIcon = styled(DownloadIcon)`
+  width: auto;
+  height: 100%;
+`
 
-export default function Card({ item: { title, body, youtubeURL, created_at } }) {
+const YoutubeContainerStyle = (
+  <style>
+    {`
+      .youtube-container {
+        display: flex;
+        flex-grow: 1;
+      }
+    `}
+  </style>
+)
+
+export default function Card({ item: { title, youtubeURL, created_at } }) {
+  const [isReady, setIsReady] = useState(0)
+  const [isMouseOver, setIsMouseOver] = useState(false)
+
+  useEffect(() => {
+    setIsReady(1)
+  }, [])
+
   const displayDate = new Date(created_at).toDateString()
+
+  const youtubeOptions = {
+    width: '100%',
+    height: '100%',
+  }
+
+  const transitionStyles = {
+    entering: { opacity: 0 },
+    entered: { opacity: 1 },
+  }
+
   return (
-    <StyledCard>
-      <Image src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/331810/pr-sample4.jpg" alt="" />
-      <Text>
-        {/* <Body>{body}</Body> */}
-        {/* <YoutubeEmbed>{youtubeURL}</YoutubeEmbed> */}
-        <Title>{title}</Title>
-        <CreatedDate>{displayDate}</CreatedDate>
-      </Text>
-    </StyledCard>
+    <Transition in={isReady} timeout={appearDuration}>
+      {state => (
+        <Container
+          onMouseEnter={() => setIsMouseOver(true)}
+          onMouseLeave={() => setIsMouseOver(false)}
+          style={{ ...transitionStyles[state] }}
+        >
+          <Header>
+            <Title>{title}</Title>
+          </Header>
+
+          {YoutubeContainerStyle}
+
+          <YouTube
+            videoId={youtubeURL}
+            opts={youtubeOptions}
+            containerClassName="youtube-container"
+          />
+
+          <Footer isMouseOver={isMouseOver}>
+            <DownloadButton href="https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg">
+              <StyledIcon />
+            </DownloadButton>
+            <FooterText>{displayDate}</FooterText>
+          </Footer>
+        </Container>
+      )}
+    </Transition>
   )
 }

@@ -1,44 +1,46 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
+import './Spinner.css'
 import vars from '../../styles/vars'
 
-const rotate = keyframes`
-  0% {
-    top: 6px;
-    height: 51px;
-  }
-  50%,
+const eq = keyframes`
+  0%,
+  40%,
   100% {
-    top: 19px;
-    height: 26px;
+    transform: scaleY(0.4);
+    -webkit-transform: scaleY(0.4);
+  }
+  20% {
+    transform: scaleY(1);
+    -webkit-transform: scaleY(1);
   }
 `
 
 const SpinnerContainer = styled.div`
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
+  width: 50px;
+  height: 40px;
 
   div {
+    background-color: ${vars.colors.primaryFaded};
+    height: 100%;
+    width: 6px;
     display: inline-block;
-    position: absolute;
-    left: 6px;
-    width: 13px;
-    background: ${vars.colors.primaryFaded};
-    animation: ${rotate} 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+    animation: ${eq} 1.2s infinite ease-in-out;
 
-    :nth-child(1) {
-      left: 6px;
-      animation-delay: -0.24s;
+    &:not(:last-child) {
+      margin-right: 2px;
     }
-    :nth-child(2) {
-      left: 26px;
-      animation-delay: -0.12s;
+    &:nth-child(2) {
+      animation-delay: -1.1s;
     }
-    :nth-child(3) {
-      left: 45px;
-      animation-delay: 0;
+    &:nth-child(3) {
+      animation-delay: -1s;
+    }
+    &:nth-child(4) {
+      animation-delay: -0.9s;
+    }
+    &:nth-child(5) {
+      animation-delay: -0.8s;
     }
   }
 `
@@ -46,7 +48,11 @@ const SpinnerContainer = styled.div`
 export default function Spinner() {
   return (
     <SpinnerContainer>
-      <div /> <div /> <div />
+      <div />
+      <div />
+      <div />
+      <div />
+      <div />
     </SpinnerContainer>
   )
 }

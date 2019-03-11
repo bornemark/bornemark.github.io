@@ -28,7 +28,7 @@ const StyledNavLink = styled(NavLink)`
   color: inherit;
 
   &.active {
-    color: ${vars.colors.yellow};
+    color: ${vars.colors.accent};
   }
 `
 

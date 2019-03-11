@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { transparentize } from 'polished'
 import Sidebar from './components/Sidebar'
 import vars from './styles/vars'
 import HomePage from './pages/Home'
@@ -11,7 +12,7 @@ const sidebarWidth = '300px'
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: ${vars.colors.backgroundLight};
+  background-color: ${vars.colors.backgroundDark};
 `
 
 const SidebarContainer = styled.section`
@@ -20,16 +21,15 @@ const SidebarContainer = styled.section`
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: ${vars.colors.backgroundDark};
+  background-color: ${vars.colors.backgroundDarker};
   padding: 3rem;
   padding-top: 5rem;
   color: ${vars.colors.white};
-  border-right: 1px solid ${vars.colors.yellow};
+  border-right: 1px solid ${transparentize(0.7, vars.colors.accent)};
 `
 
 const Content = styled.section`
   padding: 4rem;
-  /* padding-left: 3.5rem; */
   margin-left: ${sidebarWidth};
   min-height: 100vh;
   max-width: 70rem;
