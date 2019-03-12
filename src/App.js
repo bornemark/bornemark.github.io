@@ -17,7 +17,7 @@ const Container = styled.div`
 
 const SidebarContainer = styled.section`
   width: ${sidebarWidth};
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   bottom: 0;
@@ -25,14 +25,13 @@ const SidebarContainer = styled.section`
   padding: 3rem;
   padding-top: 5rem;
   color: ${vars.colors.white};
-  border-right: 1px solid ${transparentize(0.7, vars.colors.accent)};
+  border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};
 `
 
 const Content = styled.section`
   padding: 4rem;
   margin-left: ${sidebarWidth};
-  min-height: 100vh;
-  max-width: 70rem;
+  max-width: 80rem;
 `
 
 export default function App() {
