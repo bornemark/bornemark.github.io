@@ -1,18 +1,20 @@
 import React from 'react'
 import styled from 'styled-components'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import { transparentize } from 'polished'
+import { Route, withRouter } from 'react-router-dom'
+import { transparentize, darken } from 'polished'
 import Sidebar from './components/Sidebar'
 import vars from './styles/vars'
 import HomePage from './pages/Home'
 import OriginalsPage from './pages/Originals'
 import MixtapesPage from './pages/Mixtapes'
+import useBackgroundColorFromRoute from './hooks/useBackgroundColorFromRoute'
 
 const sidebarWidth = '300px'
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: ${vars.colors.backgroundDark};
+  background-color: ${props => props.backgroundColor};
+  transition: background-color 0.5s ease-out;
 `
 
 const SidebarContainer = styled.section`
@@ -21,11 +23,12 @@ const SidebarContainer = styled.section`
   top: 0;
   left: 0;
   bottom: 0;
-  background-color: ${vars.colors.backgroundDarker};
   padding: 3rem;
   padding-top: 5rem;
   color: ${vars.colors.white};
   border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};
+  background-color: ${props => darken(0.06, props.backgroundColor)};
+  transition: background-color 0.5s ease-out;
 `
 
 const Content = styled.section`
@@ -34,20 +37,22 @@ const Content = styled.section`
   max-width: 80rem;
 `
 
-export default function App() {
-  return (
-    <Router>
-      <Container>
-        <SidebarContainer>
-          <Sidebar />
-        </SidebarContainer>
+function App({ location }) {
+  const backgroundColor = useBackgroundColorFromRoute(vars.colors.brownDark, location.pathname)
 
-        <Content>
-          <Route path="/" exact component={HomePage} />
-          <Route path="/originals/" component={OriginalsPage} />
-          <Route path="/mixtapes/" component={MixtapesPage} />
-        </Content>
-      </Container>
-    </Router>
+  return (
+    <Container backgroundColor={backgroundColor}>
+      <SidebarContainer backgroundColor={backgroundColor}>
+        <Sidebar />
+      </SidebarContainer>
+
+      <Content>
+        <Route path="/" exact component={HomePage} />
+        <Route path="/originals/" component={OriginalsPage} />
+        <Route path="/mixtapes/" component={MixtapesPage} />
+      </Content>
+    </Container>
   )
 }
+
+export default withRouter(App)

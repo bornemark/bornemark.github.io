@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "eslint-plugin-react-hooks": "^1.5.0",
+    "lodash": "^4.17.11",
     "polished": "^3.0.3",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",

@@ -9,7 +9,9 @@
     "no-param-reassign": 0,
     "linebreak-style": 0,
     "import/prefer-default-export": 0,
-    "camelcase": 0
+    "camelcase": 0,
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   },
   "globals": {
     "window": true,
@@ -21,6 +23,6 @@
     "navigator": true,
     "fetch": true
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "react-hooks"],
   "parser": "babel-eslint"
 }

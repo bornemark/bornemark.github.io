@@ -1,16 +1,18 @@
 const colors = {
-  primary: '#3c3c3c',
+  gray: '#4a4a4a',
+  grayDark: '#1b1b1b',
+  grayLight: '#cccccc',
   primaryFaded: '#adadad',
-  backgroundDarker: '#1c2127',
-  backgroundDark: '#2a2f3a',
-  backgroundLight: '#e2e2e2',
+  brownDarker: '#1c2127',
+  brownDark: '#2a2f3a',
   shadowPrimary: 'rgba(0,0,0,0.2)',
   shadowHover: 'rgba(0,0,0,0.04)',
   borderPrimary: '#ececec',
   borderHover: '#e2e2e2',
   white: 'white',
   accent: '#FFDFA5',
-  gray: '#b1b1b1',
+  green: '#1f231f',
+  purple: '#231e22',
 }
 
 const shadows = {

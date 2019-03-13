@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
-import { Download as DownloadIcon } from 'styled-icons/feather/Download'
 import vars from '../styles/vars'
 
 const ANIMATION_APPEAR_DURATION = 200
@@ -38,22 +37,12 @@ const Footer = styled.figcaption`
   padding: 0 0.35rem;
   margin-top: 2px;
   transition: color 0.15s ease-in;
-  color: ${vars.colors.white};
+  color: ${vars.colors.grayLight};
 `
 
 const FooterText = styled.p`
   font-size: 0.9em;
   margin: 0;
-`
-
-const DownloadButton = styled.a`
-  height: 100%;
-  color: inherit;
-`
-
-const StyledIcon = styled(DownloadIcon)`
-  width: auto;
-  height: 100%;
 `
 
 export default function Track({ item: { title, soundcloudId, created_at } }) {
@@ -89,9 +78,6 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
           />
 
           <Footer>
-            {/* <DownloadButton href="https://upload.wikimedia.org/wikipedia/en/a/a9/Example.jpg">
-              <StyledIcon />
-            </DownloadButton> */}
             <FooterText>{displayDate}</FooterText>
           </Footer>
         </Container>

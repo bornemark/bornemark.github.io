@@ -19,7 +19,7 @@ export default function OriginalsPage() {
 
     return (
       <Grid>
-        {originals.map(m => (
+        {originals.data.map(m => (
           <Track key={m.id} item={m} />
         ))}
       </Grid>
