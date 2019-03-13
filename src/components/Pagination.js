@@ -42,8 +42,6 @@ function Pagination({ page, lastPage, setPage }) {
     return null
   }
 
-  console.log('render pagination')
-
   const goToFirst = () => setPage(1)
   const goTwoBack = () => {
     if (page - 2 < 1) return
