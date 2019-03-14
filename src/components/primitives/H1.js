@@ -7,5 +7,5 @@ export default styled.h1`
   font-family: ${vars.typography.primary};
   text-transform: lowercase;
   margin: 0;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
 `

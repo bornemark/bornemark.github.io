@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react'
-import { debounce } from 'lodash'
 
-export default function useFetch(url, method = 'GET', body = null, deps = []) {
+export default function useFetch(url, method = 'GET', body = null, deps) {
   const [fetching, setFetching] = useState(true)
   const [data, setData] = useState(null)
 
@@ -25,11 +24,8 @@ export default function useFetch(url, method = 'GET', body = null, deps = []) {
     }
   }
 
-  const debouncedFetch = debounce(fetchUrl, 1000)
-
   useEffect(() => {
-    debouncedFetch()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    fetchUrl()
   }, deps)
 
   return [data, fetching]

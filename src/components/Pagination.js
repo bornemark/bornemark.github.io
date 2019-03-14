@@ -5,7 +5,7 @@ import vars from '../styles/vars'
 const Container = styled.div`
   display: flex;
   flex-wrap: nowrap;
-  margin-bottom: 3rem;
+  margin-top: 3rem;
 
   > button:not(:last-child) {
     margin-right: 0.5rem;
@@ -13,10 +13,10 @@ const Container = styled.div`
 `
 
 const Button = styled.button`
-  height: 1.6rem;
-  min-width: 1.7rem;
-  background: none;
-  border: 1px solid ${vars.colors.accent};
+  height: 1.9rem;
+  min-width: 1.9rem;
+  background: ${vars.colors.grayTransparent};
+  border: 2px solid ${vars.colors.accentTransparent};
   border-radius: ${vars.other.borderRadiusPrimary};
   padding: 0 0.5rem;
   cursor: pointer;
@@ -37,29 +37,25 @@ const IconButton = styled(Button)`
   font-size: 1.1em;
 `
 
-function Pagination({ page, lastPage, setPage }) {
-  if (!lastPage) {
-    return null
-  }
-
-  const goToFirst = () => setPage(1)
+function Pagination({ page, lastPage, setPageNumber }) {
+  const goToFirst = () => setPageNumber(1)
   const goTwoBack = () => {
     if (page - 2 < 1) return
-    setPage(page - 2)
+    setPageNumber(page - 2)
   }
   const goOneBack = () => {
     if (page - 1 < 1) return
-    setPage(page - 1)
+    setPageNumber(page - 1)
   }
   const goOneAhead = () => {
     if (page + 1 > lastPage) return
-    setPage(page + 1)
+    setPageNumber(page + 1)
   }
   const goTwoAhead = () => {
     if (page + 2 > lastPage) return
-    setPage(page + 2)
+    setPageNumber(page + 2)
   }
-  const goToLast = () => setPage(lastPage)
+  const goToLast = () => setPageNumber(lastPage)
 
   return (
     <Container>

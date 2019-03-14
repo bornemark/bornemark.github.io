@@ -1,8 +1,11 @@
+import { transparentize } from 'polished'
+
 const colors = {
   gray: '#4a4a4a',
   grayDark: '#1b1b1b',
   grayLight: '#cccccc',
   primaryFaded: '#adadad',
+  grayTransparent: transparentize(0.95, 'black'),
   brownDarker: '#1c2127',
   brownDark: '#2a2f3a',
   shadowPrimary: 'rgba(0,0,0,0.2)',
@@ -11,6 +14,7 @@ const colors = {
   borderHover: '#e2e2e2',
   white: 'white',
   accent: '#FFDFA5',
+  accentTransparent: transparentize(0.75, '#FFDFA5'),
   green: '#1f231f',
   purple: '#231e22',
 }
@@ -26,6 +30,7 @@ const typography = {
 
 const other = {
   borderRadiusPrimary: '4px',
+  debounceTime: 250,
 }
 
 export default {

@@ -7,13 +7,13 @@ export default function useBackgroundColorFromRoute(initialColor, route) {
   useEffect(() => {
     switch (route) {
       case '/':
-        setBackgroundColor(vars.colors.brownDarker)
+        setBackgroundColor(vars.colors.purple)
         break
       case '/originals':
         setBackgroundColor(vars.colors.green)
         break
       case '/mixtapes':
-        setBackgroundColor(vars.colors.purple)
+        setBackgroundColor(vars.colors.brownDarker)
         break
       default:
         setBackgroundColor('black')
