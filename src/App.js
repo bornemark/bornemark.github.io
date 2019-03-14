@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Route } from 'react-router-dom'
 import { transparentize, darken } from 'polished'
 import useReactRouter from 'use-react-router'
-import Sidebar from './components/Sidebar'
+import Sidebar from './components/Sidebar/Sidebar'
 import vars from './styles/vars'
 import HomePage from './pages/Home'
 import TracksPage from './pages/Tracks'
@@ -24,15 +24,16 @@ const SidebarContainer = styled.section`
   left: 0;
   bottom: 0;
   padding: 3rem;
-  padding-top: 5rem;
+  padding-top: 5.5rem;
   color: ${vars.colors.white};
   border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};
-  background-color: ${props => darken(0.04, props.backgroundColor)};
+  background-color: ${props => darken(0.03, props.backgroundColor)};
   transition: background-color 0.5s ease-out;
 `
 
 const ContentContainer = styled.section`
   padding: 4rem;
+  padding-top: 3rem;
   margin-left: ${sidebarWidth};
   max-width: 80rem;
 `

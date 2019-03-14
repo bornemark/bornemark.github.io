@@ -3,13 +3,13 @@ import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 import vars from '../styles/vars'
 
-const ANIMATION_APPEAR_DURATION = 200
+const ANIMATION_APPEAR_DURATION = 1000
 const SOUNDCLOUD_PLAYER_HEIGHT = '10rem'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  transition: opacity ${ANIMATION_APPEAR_DURATION}ms ease-in;
+  transition: opacity ${ANIMATION_APPEAR_DURATION}ms cubic-bezier(0, 0.47, 0.04, 0.37);
 `
 
 const Header = styled.header`
@@ -17,7 +17,7 @@ const Header = styled.header`
   justify-content: space-between;
   align-items: flex-end;
   flex-wrap: nowrap;
-  margin-bottom: 0.7rem;
+  margin-bottom: 0.8rem;
   color: ${vars.colors.white};
 `
 
