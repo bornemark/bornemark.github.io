@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 import vars from '../styles/vars'
+import ThreeDotsLoader from '../icons/ThreeDotsLoader'
 
-const ANIMATION_APPEAR_DURATION = 1000
+const ANIMATION_APPEAR_DURATION = 250
 const SOUNDCLOUD_PLAYER_HEIGHT = '10rem'
 
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  transition: opacity ${ANIMATION_APPEAR_DURATION}ms cubic-bezier(0, 0.47, 0.04, 0.37);
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity ${ANIMATION_APPEAR_DURATION}ms ease-out;
+`
+
+const SoundCloudPlayerPlaceholder = styled.div`
+  display: ${props => (props.isReady ? 'none' : 'flex')};
+  width: 100%;
+  height: ${SOUNDCLOUD_PLAYER_HEIGHT};
+  align-items: center;
+  justify-content: center;
+  background-color: ${vars.colors.whiteTransparent};
+  border-radius: ${vars.other.borderRadiusPrimary};
 `
 
 const Header = styled.header`
@@ -34,6 +48,7 @@ const Footer = styled.figcaption`
   align-items: flex-end;
   justify-content: space-between;
   height: 1.3rem;
+  width: 100%;
   padding: 0 0.35rem;
   margin-top: 2px;
   transition: color 0.15s ease-in;
@@ -46,7 +61,16 @@ const FooterText = styled.p`
 `
 
 export default function Track({ item: { title, soundcloudId, created_at } }) {
+  const [isReady, setIsReady] = useState(false)
   const displayDate = new Date(created_at).toDateString()
+
+  useEffect(() => {
+    /* global SC */
+    const player = SC.Widget(document.getElementById('sc-widget'))
+    player.bind(SC.Widget.Events.READY, () => {
+      setIsReady(true)
+    })
+  }, [])
 
   const transitionStyles = {
     entering: { opacity: 0 },
@@ -61,11 +85,20 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
             <Title>{title}</Title>
           </Header>
 
+          <SoundCloudPlayerPlaceholder isReady={isReady}>
+            <ThreeDotsLoader />
+          </SoundCloudPlayerPlaceholder>
+
           <iframe
+            id="sc-widget"
             title="Soundcloud Player"
             scrolling="no"
             frameBorder="no"
-            style={{ display: 'flex', width: '100%', height: SOUNDCLOUD_PLAYER_HEIGHT }}
+            style={{
+              display: isReady ? 'flex' : 'none',
+              width: '100%',
+              height: SOUNDCLOUD_PLAYER_HEIGHT,
+            }}
             src={
               `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${soundcloudId}` +
               '&auto_play=false' +
@@ -76,7 +109,6 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
               '&visual=true'
             }
           />
-
           <Footer>
             <FooterText>{displayDate}</FooterText>
           </Footer>

@@ -23,7 +23,7 @@ const SidebarContainer = styled.section`
   top: 0;
   left: 0;
   bottom: 0;
-  padding: 3rem;
+  padding: 2.5rem;
   padding-top: 5.5rem;
   color: ${vars.colors.white};
   border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};

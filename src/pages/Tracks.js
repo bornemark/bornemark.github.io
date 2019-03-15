@@ -2,7 +2,7 @@
 
 import React, { useState, useMemo } from 'react'
 import Track from '../components/Track'
-import Spinner from '../components/Spinner/Spinner'
+import WaveFormLoader from '../icons/WaveFormLoader'
 import H1 from '../components/primitives/H1'
 import Grid from '../components/primitives/Grid'
 import Pagination from '../components/Pagination'
@@ -11,7 +11,7 @@ import useFetch from '../hooks/useFetch'
 import useDebounce from '../hooks/useDebounce'
 import vars from '../styles/vars'
 
-export default function GenericTracksPage({ title, trackType }) {
+export default function TracksPage({ title, trackType }) {
   const [pageNumber, setPageNumber] = useState(1)
   const [debouncedPageNumber] = useDebounce(pageNumber, vars.other.debounceTime)
   const [searchTerm, setSearchTerm] = useState('')
@@ -44,7 +44,7 @@ export default function GenericTracksPage({ title, trackType }) {
     />
   )
 
-  const content = fetching ? <Spinner /> : renderedMixtapes
+  const content = fetching ? <WaveFormLoader /> : renderedMixtapes
 
   return (
     <>

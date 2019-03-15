@@ -1,7 +1,6 @@
 import React from 'react'
 import styled, { keyframes } from 'styled-components'
-import './Spinner.css'
-import vars from '../../styles/vars'
+import vars from '../styles/vars'
 
 const eq = keyframes`
   0%,
@@ -16,7 +15,7 @@ const eq = keyframes`
   }
 `
 
-const SpinnerContainer = styled.div`
+const Container = styled.div`
   width: 50px;
   height: 40px;
 
@@ -45,14 +44,14 @@ const SpinnerContainer = styled.div`
   }
 `
 
-export default function Spinner() {
+export default function Spinner({ className }) {
   return (
-    <SpinnerContainer>
+    <Container className={className}>
       <div />
       <div />
       <div />
       <div />
       <div />
-    </SpinnerContainer>
+    </Container>
   )
 }
