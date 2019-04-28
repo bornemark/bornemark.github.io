@@ -14,6 +14,7 @@ const Container = styled.div`
   align-items: center;
   opacity: 0;
   transition: opacity ${ANIMATION_APPEAR_DURATION}ms ease-out;
+  min-width: 16rem;
 `
 
 const SoundCloudPlayerPlaceholder = styled.div`
@@ -62,7 +63,10 @@ const FooterText = styled.p`
 
 export default function Track({ item: { title, soundcloudId, created_at } }) {
   const [isReady, setIsReady] = useState(false)
-  const displayDate = new Date(created_at).toDateString()
+  const formattedCreatedAtDate = new Date(created_at).toLocaleDateString('se-SV', {
+    year: 'numeric',
+    month: 'long',
+  })
 
   useEffect(() => {
     /* global SC */
@@ -110,7 +114,7 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
             }
           />
           <Footer>
-            <FooterText>{displayDate}</FooterText>
+            <FooterText>{formattedCreatedAtDate}</FooterText>
           </Footer>
         </Container>
       )}
