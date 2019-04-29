@@ -1,6 +1,6 @@
 {
   "name": "bornemark-client",
-  "homepage": "https://bornemark.github.io",
+  "homepage": "https://bornemark.github.io/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
