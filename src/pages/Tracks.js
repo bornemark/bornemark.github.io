@@ -18,7 +18,7 @@ export default function TracksPage({ title, trackType }) {
   const [debouncedSearchTerm] = useDebounce(searchTerm, vars.other.debounceTime)
 
   const [tracks, loading] = useFetch({
-    url: 'api/tracks/filter',
+    url: 'tracks/filter',
     options: useMemo(
       () => ({
         method: 'POST',
