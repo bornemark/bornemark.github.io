@@ -50,8 +50,8 @@ function App() {
 
       <ContentContainer>
         <Route path="/" exact component={HomePage} />
-        <Route path="/originals/" render={() => <TracksPage title="Originals" trackType={1} />} />
-        <Route path="/mixtapes/" render={() => <TracksPage title="Mixtapes" trackType={2} />} />
+        <Route path="/originals" render={() => <TracksPage title="Originals" trackType={1} />} />
+        <Route path="/mixtapes" render={() => <TracksPage title="Mixtapes" trackType={2} />} />
       </ContentContainer>
     </MainContainer>
   )
