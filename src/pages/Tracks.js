@@ -17,12 +17,19 @@ export default function TracksPage({ title, trackType }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [debouncedSearchTerm] = useDebounce(searchTerm, vars.other.debounceTime)
 
-  const [tracks, fetching] = useFetch(
-    '/api/tracks/filter', // route
-    'POST', // method
-    { page: debouncedPageNumber, filters: { trackType, title: debouncedSearchTerm } }, // payload
-    [debouncedPageNumber, debouncedSearchTerm], // deps
-  )
+  const [tracks, loading] = useFetch({
+    url: 'api/tracks/filter',
+    options: useMemo(
+      () => ({
+        method: 'POST',
+        body: {
+          page: debouncedPageNumber,
+          filters: { trackType, title: debouncedSearchTerm },
+        },
+      }),
+      [debouncedPageNumber, debouncedSearchTerm, trackType],
+    ),
+  })
 
   const renderedMixtapes = useMemo(
     () =>
@@ -44,7 +51,7 @@ export default function TracksPage({ title, trackType }) {
     />
   )
 
-  const content = fetching ? <WaveFormLoader /> : renderedMixtapes
+  const content = loading ? <WaveFormLoader /> : renderedMixtapes
 
   return (
     <>
