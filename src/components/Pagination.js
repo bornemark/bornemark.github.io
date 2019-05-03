@@ -2,7 +2,7 @@ import React, { memo } from 'react'
 import styled from 'styled-components'
 import vars from '../styles/vars'
 
-const Container = styled.div`
+const Container = styled.nav`
   display: flex;
   flex-wrap: nowrap;
   margin-top: 3rem;

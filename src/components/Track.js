@@ -7,14 +7,15 @@ import ThreeDotsLoader from '../icons/ThreeDotsLoader'
 const ANIMATION_APPEAR_DURATION = 250
 const SOUNDCLOUD_PLAYER_HEIGHT = '10rem'
 
-const Container = styled.div`
+const Container = styled.li`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   opacity: 0;
   transition: opacity ${ANIMATION_APPEAR_DURATION}ms ease-out;
   min-width: 16rem;
+  list-style: none;
 `
 
 const SoundCloudPlayerPlaceholder = styled.div`

@@ -17,7 +17,7 @@ const MainContainer = styled.div`
   transition: background-color 0.5s ease-out;
 `
 
-const SidebarContainer = styled.section`
+const SidebarContainer = styled.div`
   width: ${sidebarWidth};
   position: fixed;
   top: 0;
@@ -31,7 +31,7 @@ const SidebarContainer = styled.section`
   transition: background-color 0.5s ease-out;
 `
 
-const ContentContainer = styled.section`
+const ContentContainer = styled.main`
   padding: 4rem;
   padding-top: 3rem;
   margin-left: ${sidebarWidth};

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import vars from '../../styles/vars'
 import { ReactComponent as Logo } from './logo.svg'
 
-const Container = styled.div`
+const Container = styled.nav`
   width: 100%;
 `
 
