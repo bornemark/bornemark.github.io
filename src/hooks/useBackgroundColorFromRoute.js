@@ -5,20 +5,21 @@ export default function useBackgroundColorFromRoute(initialColor, route) {
   const [backgroundColor, setBackgroundColor] = useState(initialColor)
 
   useEffect(() => {
-    switch (route) {
-      case '/':
-        setBackgroundColor(vars.colors.purple)
-        break
-      case '/originals':
-        setBackgroundColor(vars.colors.green)
-        break
-      case '/mixtapes':
-        setBackgroundColor(vars.colors.brownDarker)
-        break
-      default:
-        setBackgroundColor('black')
-        break
+    const getBackgroundColor = () => {
+      switch (route) {
+        case '/':
+          return vars.colors.purple
+        case '/originals':
+          return vars.colors.green
+        case '/mixtapes':
+          return vars.colors.brownDarker
+        default:
+          return 'black'
+      }
     }
+
+    const color = getBackgroundColor()
+    setBackgroundColor(color)
   }, [route])
 
   return backgroundColor

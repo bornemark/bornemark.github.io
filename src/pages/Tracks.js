@@ -1,5 +1,3 @@
-// Component used as a base for both Originals and Mixtapes pages
-
 import React, { useState, useMemo } from 'react'
 import Track from '../components/Track'
 import WaveFormLoader from '../icons/WaveFormLoader'
@@ -7,9 +5,13 @@ import H1 from '../components/primitives/H1'
 import Grid from '../components/primitives/Grid'
 import Pagination from '../components/Pagination'
 import Search from '../components/Search'
-import useFetch from '../hooks/useFetch'
 import useDebounce from '../hooks/useDebounce'
 import vars from '../styles/vars'
+import useTracks from '../hooks/useTracks'
+
+/**
+ * Component used as a base for both Originals and Mixtapes pages
+ */
 
 export default function TracksPage({ title, trackType }) {
   const [pageNumber, setPageNumber] = useState(1)
@@ -17,19 +19,7 @@ export default function TracksPage({ title, trackType }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [debouncedSearchTerm] = useDebounce(searchTerm, vars.other.debounceTime)
 
-  const [tracks, loading] = useFetch({
-    url: 'tracks/filter',
-    options: useMemo(
-      () => ({
-        method: 'POST',
-        body: {
-          page: debouncedPageNumber,
-          filters: { trackType, title: debouncedSearchTerm },
-        },
-      }),
-      [debouncedPageNumber, debouncedSearchTerm, trackType],
-    ),
-  })
+  const [tracks, loading] = useTracks({ trackType, debouncedPageNumber, debouncedSearchTerm })
 
   const renderedMixtapes = useMemo(
     () =>
@@ -56,11 +46,8 @@ export default function TracksPage({ title, trackType }) {
   return (
     <>
       <H1>{title}</H1>
-
       <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
       {content}
-
       {pagination}
     </>
   )
