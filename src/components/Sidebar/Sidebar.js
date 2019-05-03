@@ -51,11 +51,6 @@ export default function Sidebar() {
       <StyledLogo />
       <List>
         <ListItem>
-          <StyledNavLink exact to="/">
-            home
-          </StyledNavLink>
-        </ListItem>
-        <ListItem>
           <StyledNavLink to="/originals">Originals</StyledNavLink>
         </ListItem>
         <ListItem>

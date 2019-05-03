@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Route } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
 import { transparentize, darken } from 'polished'
 import useReactRouter from 'use-react-router'
 import Sidebar from './components/Sidebar/Sidebar'
 import vars from './styles/vars'
-import HomePage from './pages/Home'
 import TracksPage from './pages/Tracks'
 import useBackgroundColorFromRoute from './hooks/useBackgroundColorFromRoute'
 
@@ -14,7 +13,6 @@ const sidebarWidth = '300px'
 const MainContainer = styled.div`
   min-height: 100vh;
   background-color: ${props => props.backgroundColor};
-  transition: background-color 0.5s ease-out;
 `
 
 const SidebarContainer = styled.div`
@@ -28,14 +26,10 @@ const SidebarContainer = styled.div`
   color: ${vars.colors.white};
   border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};
   background-color: ${props => darken(0.03, props.backgroundColor)};
-  transition: background-color 0.5s ease-out;
 `
 
 const ContentContainer = styled.main`
-  padding: 4rem;
-  padding-top: 3rem;
   margin-left: ${sidebarWidth};
-  max-width: 80rem;
 `
 
 function App() {
@@ -49,9 +43,21 @@ function App() {
       </SidebarContainer>
 
       <ContentContainer>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/originals" render={() => <TracksPage title="Originals" trackType={1} />} />
-        <Route path="/mixtapes" render={() => <TracksPage title="Mixtapes" trackType={2} />} />
+        <Switch>
+          <Route
+            path="/originals"
+            render={() => (
+              <TracksPage title="Originals" trackType={1} backgroundColor={backgroundColor} />
+            )}
+          />
+          <Route
+            path="/mixtapes"
+            render={() => (
+              <TracksPage title="Mixtapes" trackType={2} backgroundColor={backgroundColor} />
+            )}
+          />
+          <Redirect from="" to="/originals" />
+        </Switch>
       </ContentContainer>
     </MainContainer>
   )

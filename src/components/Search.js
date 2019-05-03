@@ -5,7 +5,7 @@ import vars from '../styles/vars'
 
 const Container = styled.div`
   display: flex;
-  margin-bottom: 3rem;
+  margin-bottom: 4rem;
   flex-wrap: nowrap;
   align-items: center;
   background-color: ${vars.colors.grayTransparent};
