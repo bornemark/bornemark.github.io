@@ -1,7 +1,11 @@
 import { useMemo } from 'react'
 import useFetch from './useFetch'
 
-export default function useTracks({ trackType, debouncedPageNumber, debouncedSearchTerm }) {
+export default function useTracks({
+  trackType,
+  debouncedPageNumber,
+  debouncedSearchTerm,
+}) {
   return useFetch({
     url: 'tracks/filter',
     options: useMemo(
@@ -12,7 +16,7 @@ export default function useTracks({ trackType, debouncedPageNumber, debouncedSea
           filters: { trackType, title: debouncedSearchTerm },
         },
       }),
-      [debouncedPageNumber, debouncedSearchTerm, trackType],
+      [debouncedPageNumber, debouncedSearchTerm, trackType]
     ),
   })
 }

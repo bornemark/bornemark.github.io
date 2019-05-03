@@ -33,7 +33,11 @@ export default function Search({ searchTerm, setSearchTerm }) {
   return (
     <Container>
       <StyledSearchIcon />
-      <Input value={searchTerm} onChange={e => setSearchTerm(e.target.value)} autoFocus />
+      <Input
+        value={searchTerm}
+        onChange={e => setSearchTerm(e.target.value)}
+        autoFocus
+      />
     </Container>
   )
 }

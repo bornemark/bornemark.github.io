@@ -34,7 +34,10 @@ const ContentContainer = styled.main`
 
 function App() {
   const { location } = useReactRouter()
-  const backgroundColor = useBackgroundColorFromRoute(vars.colors.brownDark, location.pathname)
+  const backgroundColor = useBackgroundColorFromRoute(
+    vars.colors.brownDark,
+    location.pathname
+  )
 
   return (
     <MainContainer backgroundColor={backgroundColor}>
@@ -47,13 +50,21 @@ function App() {
           <Route
             path="/originals"
             render={() => (
-              <TracksPage title="Originals" trackType={1} backgroundColor={backgroundColor} />
+              <TracksPage
+                title="Originals"
+                trackType={1}
+                backgroundColor={backgroundColor}
+              />
             )}
           />
           <Route
             path="/mixtapes"
             render={() => (
-              <TracksPage title="Mixtapes" trackType={2} backgroundColor={backgroundColor} />
+              <TracksPage
+                title="Mixtapes"
+                trackType={2}
+                backgroundColor={backgroundColor}
+              />
             )}
           />
           <Redirect from="" to="/originals" />

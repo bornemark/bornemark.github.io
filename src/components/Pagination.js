@@ -23,7 +23,8 @@ const Button = styled.button`
   font-size: 0.9em;
   outline: none;
   background-color: ${props => (props.active ? vars.colors.accent : 'none')};
-  color: ${props => (props.active ? vars.colors.grayDark : vars.colors.grayLight)};
+  color: ${props =>
+    props.active ? vars.colors.grayDark : vars.colors.grayLight};
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
 
   &:hover {

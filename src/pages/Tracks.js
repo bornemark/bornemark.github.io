@@ -27,7 +27,10 @@ const Header = styled.header`
     width: 100%;
     height: 100%;
     width: 100%;
-    background-image: linear-gradient(transparent 0%, ${props => props.backgroundColor} 100%),
+    background-image: linear-gradient(
+        transparent 0%,
+        ${props => props.backgroundColor} 100%
+      ),
       url('https://i.imgur.com/rrstaTs.png');
     background-position: 50% 65%;
     background-size: cover;
@@ -52,7 +55,11 @@ export default function TracksPage({ title, trackType, backgroundColor }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [debouncedSearchTerm] = useDebounce(searchTerm, vars.other.debounceTime)
 
-  const [tracks, loading] = useTracks({ trackType, debouncedPageNumber, debouncedSearchTerm })
+  const [tracks, loading] = useTracks({
+    trackType,
+    debouncedPageNumber,
+    debouncedSearchTerm,
+  })
 
   const renderedMixtapes = useMemo(
     () =>
@@ -63,7 +70,7 @@ export default function TracksPage({ title, trackType, backgroundColor }) {
           ))}
         </Grid>
       ),
-    [tracks],
+    [tracks]
   )
 
   const pagination = tracks && tracks.lastPage > 1 && (

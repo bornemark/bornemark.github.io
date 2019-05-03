@@ -64,10 +64,13 @@ const FooterText = styled.p`
 
 export default function Track({ item: { title, soundcloudId, created_at } }) {
   const [isReady, setIsReady] = useState(false)
-  const formattedCreatedAtDate = new Date(created_at).toLocaleDateString('se-SV', {
-    year: 'numeric',
-    month: 'long',
-  })
+  const formattedCreatedAtDate = new Date(created_at).toLocaleDateString(
+    'se-SV',
+    {
+      year: 'numeric',
+      month: 'long',
+    }
+  )
 
   useEffect(() => {
     /* global SC */
