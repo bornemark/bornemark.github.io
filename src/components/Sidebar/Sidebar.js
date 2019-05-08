@@ -10,7 +10,8 @@ const Container = styled.nav`
 
 const StyledLogo = styled(Logo)`
   display: block;
-  width: 75%;
+  width: 100%;
+  max-width: 12rem;
   opacity: 0.75;
   margin: auto;
 `

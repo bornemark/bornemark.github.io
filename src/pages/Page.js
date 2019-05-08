@@ -11,7 +11,7 @@ export const Header = styled.header`
   position: relative;
   padding: 4rem;
   height: 24vh;
-  width: calc(100% - 2rem);
+  width: 75vw;
 
   &:before {
     content: '';

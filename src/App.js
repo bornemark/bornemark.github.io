@@ -10,7 +10,7 @@ import MixtapesPage from './pages/MixtapesPage'
 import useBackgroundColorFromRoute from './services/useBackgroundColorFromRoute'
 import { AppContext } from './AppContext'
 
-const sidebarWidth = '300px'
+const sidebarWidth = '20vw'
 
 const MainContainer = styled.div`
   min-height: 100vh;
@@ -24,7 +24,7 @@ const SidebarContainer = styled.div`
   left: 0;
   bottom: 0;
   padding: 2.5rem;
-  padding-top: 5.5rem;
+  padding-top: 6rem;
   color: ${vars.colors.white};
   border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};
   background-color: ${props => darken(0.03, props.bgColor)};
