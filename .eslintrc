@@ -4,6 +4,14 @@
   ],
   "rules": {
     "react/prop-types": 0,
-    "camelcase": 0
+    "react/display-name": 0,
+    "camelcase": 0,
+    "no-shadow": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "printWidth": 80
+      }
+    ]
   }
 }

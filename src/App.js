@@ -2,17 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import { transparentize, darken } from 'polished'
-import useReactRouter from 'use-react-router'
 import Sidebar from './components/Sidebar/Sidebar'
 import vars from './styles/vars'
-import TracksPage from './pages/Tracks'
-import useBackgroundColorFromRoute from './hooks/useBackgroundColorFromRoute'
+import VideosPage from './pages/VideosPage'
+import OriginalsPage from './pages/OriginalsPage'
+import MixtapesPage from './pages/MixtapesPage'
+import useBackgroundColorFromRoute from './services/useBackgroundColorFromRoute'
+import { AppContext } from './AppContext'
 
 const sidebarWidth = '300px'
 
 const MainContainer = styled.div`
   min-height: 100vh;
-  background-color: ${props => props.backgroundColor};
+  background-color: ${props => props.bgColor};
 `
 
 const SidebarContainer = styled.div`
@@ -25,7 +27,7 @@ const SidebarContainer = styled.div`
   padding-top: 5.5rem;
   color: ${vars.colors.white};
   border-right: 1px solid ${transparentize(0.4, vars.colors.accent)};
-  background-color: ${props => darken(0.03, props.backgroundColor)};
+  background-color: ${props => darken(0.03, props.bgColor)};
 `
 
 const ContentContainer = styled.main`
@@ -33,40 +35,21 @@ const ContentContainer = styled.main`
 `
 
 function App() {
-  const { location } = useReactRouter()
-  const backgroundColor = useBackgroundColorFromRoute(
-    vars.colors.brownDark,
-    location.pathname
-  )
+  const {
+    state: { backgroundColor },
+  } = React.useContext(AppContext)
 
   return (
-    <MainContainer backgroundColor={backgroundColor}>
-      <SidebarContainer backgroundColor={backgroundColor}>
+    <MainContainer bgColor={backgroundColor}>
+      <SidebarContainer bgColor={backgroundColor}>
         <Sidebar />
       </SidebarContainer>
 
       <ContentContainer>
         <Switch>
-          <Route
-            path="/originals"
-            render={() => (
-              <TracksPage
-                title="Originals"
-                trackType={1}
-                backgroundColor={backgroundColor}
-              />
-            )}
-          />
-          <Route
-            path="/mixtapes"
-            render={() => (
-              <TracksPage
-                title="Mixtapes"
-                trackType={2}
-                backgroundColor={backgroundColor}
-              />
-            )}
-          />
+          <Route path="/originals" component={OriginalsPage} />
+          <Route path="/mixtapes" component={MixtapesPage} />
+          {/* <Route path="/videos" component={VideosPage} /> */}
           <Redirect from="" to="/originals" />
         </Switch>
       </ContentContainer>

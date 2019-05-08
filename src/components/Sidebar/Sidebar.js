@@ -37,6 +37,7 @@ const ListItem = styled.li`
 `
 
 const StyledNavLink = styled(NavLink)`
+  display: block;
   text-decoration: none;
   color: inherit;
 
@@ -56,6 +57,9 @@ export default function Sidebar() {
         <ListItem>
           <StyledNavLink to="/mixtapes">Mixtapes</StyledNavLink>
         </ListItem>
+        {/* <ListItem>
+          <StyledNavLink to="/videos">Videos</StyledNavLink>
+        </ListItem> */}
       </List>
     </Container>
   )

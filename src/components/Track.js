@@ -69,7 +69,7 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
     {
       year: 'numeric',
       month: 'long',
-    }
+    },
   )
 
   useEffect(() => {

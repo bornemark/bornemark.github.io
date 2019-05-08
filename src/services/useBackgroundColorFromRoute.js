@@ -1,26 +1,31 @@
-import { useState, useEffect } from 'react'
+import React from 'react'
+import useReactRouter from 'use-react-router'
 import vars from '../styles/vars'
 
-export default function useBackgroundColorFromRoute(initialColor, route) {
-  const [backgroundColor, setBackgroundColor] = useState(initialColor)
+export default function useBackgroundColorFromRoute() {
+  const { location } = useReactRouter()
+  const [backgroundColor, setBackgroundColor] = React.useState(
+    vars.colors.purple,
+  )
 
-  useEffect(() => {
+  React.useEffect(() => {
     const getBackgroundColor = () => {
-      switch (route) {
+      switch (location.pathname) {
         case '/':
           return vars.colors.purple
         case '/originals':
           return vars.colors.green
         case '/mixtapes':
           return vars.colors.brownDarker
+        case '/videos':
+          return vars.colors.green
         default:
           return 'black'
       }
     }
-
     const color = getBackgroundColor()
     setBackgroundColor(color)
-  }, [route])
+  }, [location])
 
   return backgroundColor
 }

@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Search as SearchIcon } from 'styled-icons/fa-solid/Search'
 import vars from '../styles/vars'
+import useDebounce from '../services/useDebounce'
+import { AppContext } from '../AppContext'
 
 const Container = styled.div`
   display: flex;
@@ -29,7 +31,15 @@ const Input = styled.input`
   color: white;
 `
 
-export default function Search({ searchTerm, setSearchTerm }) {
+export default function Search() {
+  const [searchTerm, setSearchTerm] = React.useState('')
+  const { dispatch } = React.useContext(AppContext)
+  const debouncedSearchTerm = useDebounce(searchTerm, 500)
+
+  React.useEffect(() => {
+    dispatch({ type: 'SET_SEARCH_TERM', searchTerm: debouncedSearchTerm })
+  }, [debouncedSearchTerm, dispatch])
+
   return (
     <Container>
       <StyledSearchIcon />

@@ -1,6 +1,8 @@
 import React, { memo } from 'react'
 import styled from 'styled-components'
 import vars from '../styles/vars'
+import { AppContext } from '../AppContext'
+import useDebounce from '../services/useDebounce'
 
 const Container = styled.nav`
   display: flex;
@@ -27,10 +29,15 @@ const Button = styled.button`
     props.active ? vars.colors.grayDark : vars.colors.grayLight};
   font-weight: ${props => (props.active ? 'bold' : 'normal')};
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: ${vars.colors.accent};
     color: ${vars.colors.grayDark};
     font-weight: bold;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: default;
   }
 `
 
@@ -38,46 +45,71 @@ const IconButton = styled(Button)`
   font-size: 1.1em;
 `
 
-function Pagination({ page, lastPage, setPageNumber }) {
+function Pagination({ lastPage }) {
+  const [pageNumber, setPageNumber] = React.useState(1)
+  const { dispatch } = React.useContext(AppContext)
+  const debouncedPageNumber = useDebounce(pageNumber, 500)
+
+  React.useEffect(() => {
+    dispatch({ type: 'SET_PAGE_NUMBER', pageNumber: debouncedPageNumber })
+  }, [debouncedPageNumber, dispatch])
+
   const goToFirst = () => setPageNumber(1)
   const goTwoBack = () => {
-    if (page - 2 < 1) return
-    setPageNumber(page - 2)
+    if (pageNumber - 2 < 1) return
+    setPageNumber(pageNumber - 2)
   }
   const goOneBack = () => {
-    if (page - 1 < 1) return
-    setPageNumber(page - 1)
+    if (pageNumber - 1 < 1) return
+    setPageNumber(pageNumber - 1)
   }
   const goOneAhead = () => {
-    if (page + 1 > lastPage) return
-    setPageNumber(page + 1)
+    if (pageNumber + 1 > lastPage) return
+    setPageNumber(pageNumber + 1)
   }
   const goTwoAhead = () => {
-    if (page + 2 > lastPage) return
-    setPageNumber(page + 2)
+    if (pageNumber + 2 > lastPage) return
+    setPageNumber(pageNumber + 2)
   }
   const goToLast = () => setPageNumber(lastPage)
 
   return (
     <Container>
       {/* First */}
-      <IconButton onClick={goToFirst}>«</IconButton>
+      <IconButton onClick={goToFirst} disabled={pageNumber === 1}>
+        «
+      </IconButton>
       {/* Before */}
-      <IconButton onClick={goOneBack}>‹</IconButton>
+      <IconButton onClick={goOneBack} disabled={pageNumber - 1 === 0}>
+        ‹
+      </IconButton>
       {/* -2 */}
-      {page - 2 >= 1 && <Button onClick={goTwoBack}>{page - 2}</Button>}
+      {pageNumber - 2 >= 1 && (
+        <Button onClick={goTwoBack}>{pageNumber - 2}</Button>
+      )}
       {/* -1 */}
-      {page - 1 >= 1 && <Button onClick={goOneBack}>{page - 1}</Button>}
+      {pageNumber - 1 >= 1 && (
+        <Button onClick={goOneBack}>{pageNumber - 1}</Button>
+      )}
       {/* Current */}
-      <Button active>{page}</Button>
+      <Button active>{pageNumber}</Button>
       {/* +1 */}
-      {page + 1 <= lastPage && <Button onClick={goOneAhead}>{page + 1}</Button>}
+      {pageNumber + 1 <= lastPage && (
+        <Button onClick={goOneAhead}>{pageNumber + 1}</Button>
+      )}
       {/* +2 */}
-      {page + 2 <= lastPage && <Button onClick={goTwoAhead}>{page + 2}</Button>}
+      {pageNumber + 2 <= lastPage && (
+        <Button onClick={goTwoAhead}>{pageNumber + 2}</Button>
+      )}
       {/* Next */}
-      <IconButton onClick={goOneAhead}>›</IconButton>
+      <IconButton onClick={goOneAhead} disabled={pageNumber + 1 > lastPage}>
+        ›
+      </IconButton>
       {/* Last */}
-      <IconButton onClick={goToLast}>»</IconButton>
+
+      <IconButton onClick={goToLast} disabled={pageNumber + 1 > lastPage}>
+        »
+      </IconButton>
     </Container>
   )
 }
