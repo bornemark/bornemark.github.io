@@ -4,7 +4,7 @@ import Track from '../components/Track'
 import Page from './Page'
 
 export default function MixtapesPage(props) {
-  const [tracksData, loading] = useTracks(2)
+  const [tracksData, loading] = useTracks({ trackType: 2 })
 
   const renderedTracks = React.useMemo(
     () => tracksData && tracksData.data.map(m => <Track key={m.id} item={m} />),
@@ -12,15 +12,7 @@ export default function MixtapesPage(props) {
   )
 
   return (
-    <Page
-      title="Mixtapes"
-      shouldShowPagination={
-        tracksData && parseInt(tracksData.total) > tracksData.perPage
-      }
-      lastPage={tracksData && tracksData.lastPage}
-      loading={loading}
-      {...props}
-    >
+    <Page title="Mixtapes" tracksData={tracksData} loading={loading} {...props}>
       {renderedTracks}
     </Page>
   )

@@ -29,6 +29,11 @@ const typography = {
   primary: `'Titillium Web', sans-serif`,
 }
 
+const mediaPlayers = {
+  soundCloudPlayerHeight: '10rem',
+  youtubePlayerHeight: '250px',
+}
+
 const other = {
   borderRadiusPrimary: '4px',
   debounceTime: 250,
@@ -38,5 +43,6 @@ export default {
   colors,
   shadows,
   typography,
+  mediaPlayers,
   other,
 }

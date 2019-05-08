@@ -4,7 +4,7 @@ import Track from '../components/Track'
 import Page from './Page'
 
 export default function OriginalsPage(props) {
-  const [tracksData, loading] = useTracks(1)
+  const [tracksData, loading] = useTracks({ trackType: 1 })
 
   const renderedTracks = React.useMemo(
     () => tracksData && tracksData.data.map(m => <Track key={m.id} item={m} />),
@@ -14,10 +14,7 @@ export default function OriginalsPage(props) {
   return (
     <Page
       title="Originals"
-      shouldShowPagination={
-        tracksData && parseInt(tracksData.total) > tracksData.perPage
-      }
-      lastPage={tracksData && tracksData.lastPage}
+      tracksData={tracksData}
       loading={loading}
       {...props}
     >

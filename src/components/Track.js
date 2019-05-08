@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 import vars from '../styles/vars'
-import ThreeDotsLoader from '../icons/ThreeDotsLoader'
+import SoundCloudPlayer from './mediaPlayers/SoundCloudPlayer'
+import YoutubePlayer from './mediaPlayers/YoutubePlayer'
 
 const ANIMATION_APPEAR_DURATION = 250
-const SOUNDCLOUD_PLAYER_HEIGHT = '10rem'
 
 const Container = styled.li`
   display: flex;
@@ -18,16 +18,6 @@ const Container = styled.li`
   list-style: none;
 `
 
-const SoundCloudPlayerPlaceholder = styled.div`
-  display: ${props => (props.isReady ? 'none' : 'flex')};
-  width: 100%;
-  height: ${SOUNDCLOUD_PLAYER_HEIGHT};
-  align-items: center;
-  justify-content: center;
-  background-color: ${vars.colors.whiteTransparent};
-  border-radius: ${vars.other.borderRadiusPrimary};
-`
-
 const Header = styled.header`
   display: flex;
   justify-content: space-between;
@@ -35,6 +25,7 @@ const Header = styled.header`
   flex-wrap: nowrap;
   margin-bottom: 0.8rem;
   color: ${vars.colors.white};
+  width: 100%;
 `
 
 const Title = styled.h1`
@@ -62,8 +53,9 @@ const FooterText = styled.p`
   margin: 0;
 `
 
-export default function Track({ item: { title, soundcloudId, created_at } }) {
-  const [isReady, setIsReady] = useState(false)
+export default function Track({
+  item: { title, soundcloudId, youtubeId, created_at },
+}) {
   const formattedCreatedAtDate = new Date(created_at).toLocaleDateString(
     'se-SV',
     {
@@ -72,18 +64,16 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
     },
   )
 
-  useEffect(() => {
-    /* global SC */
-    const player = SC.Widget(document.getElementById('sc-widget'))
-    player.bind(SC.Widget.Events.READY, () => {
-      setIsReady(true)
-    })
-  }, [])
-
   const transitionStyles = {
     entering: { opacity: 0 },
     entered: { opacity: 1 },
   }
+
+  const mediaPlayer = soundcloudId ? (
+    <SoundCloudPlayer soundCloudTrackId={soundcloudId} />
+  ) : (
+    <YoutubePlayer youtubeTrackId={youtubeId} />
+  )
 
   return (
     <Transition in appear timeout={ANIMATION_APPEAR_DURATION}>
@@ -93,30 +83,9 @@ export default function Track({ item: { title, soundcloudId, created_at } }) {
             <Title>{title}</Title>
           </Header>
 
-          <SoundCloudPlayerPlaceholder isReady={isReady}>
-            <ThreeDotsLoader />
-          </SoundCloudPlayerPlaceholder>
+          {/* SC or YT */}
+          {mediaPlayer}
 
-          <iframe
-            id="sc-widget"
-            title="Soundcloud Player"
-            scrolling="no"
-            frameBorder="no"
-            style={{
-              display: isReady ? 'flex' : 'none',
-              width: '100%',
-              height: SOUNDCLOUD_PLAYER_HEIGHT,
-            }}
-            src={
-              `https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/${soundcloudId}` +
-              '&auto_play=false' +
-              '&show_comments=true' +
-              '&show_user=true' +
-              '&show_reposts=false' +
-              '&show_teaser=true' +
-              '&visual=true'
-            }
-          />
           <Footer>
             <FooterText>{formattedCreatedAtDate}</FooterText>
           </Footer>

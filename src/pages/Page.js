@@ -11,6 +11,7 @@ export const Header = styled.header`
   position: relative;
   padding: 4rem;
   height: 24vh;
+  width: calc(100% - 2rem);
 
   &:before {
     content: '';
@@ -19,7 +20,7 @@ export const Header = styled.header`
     left: 0;
     width: 100%;
     height: 100%;
-    width: calc(100% - 2rem);
+    width: 100%;
     background-image: linear-gradient(
         90deg,
         transparent 85%,
@@ -38,7 +39,7 @@ export const Header = styled.header`
   }
 `
 
-const Content = styled.section`
+const ContentContainer = styled.section`
   padding: 4rem;
   margin-top: -3rem;
   max-width: 80rem;
@@ -48,23 +49,27 @@ const NoContent = styled.p`
   font-size: 2em;
 `
 
-export default function Page({
-  title,
-  children,
-  loading,
-  shouldShowPagination,
-  lastPage,
-}) {
+const getContent = (children, isReady) => {
+  if (!children || !children.length) {
+    return isReady ? <NoContent>🤷‍♂️</NoContent> : null
+  }
+
+  return <Grid>{children}</Grid>
+}
+
+export default function Page({ title, children, loading, tracksData }) {
   const {
     state: { backgroundColor },
   } = React.useContext(AppContext)
+  const [isReady, setIsReady] = React.useState(false)
 
-  const content =
-    children && children.length ? (
-      <Grid>{children}</Grid>
-    ) : (
-      <NoContent>🤷‍♂️</NoContent>
-    )
+  React.useEffect(() => {
+    setIsReady(true)
+  }, [])
+
+  const shouldShowPagination =
+    tracksData && parseInt(tracksData.total) > tracksData.perPage
+  const lastPage = tracksData && tracksData.lastPage
 
   return (
     <>
@@ -72,11 +77,11 @@ export default function Page({
         <H1>{title}</H1>
       </Header>
 
-      <Content>
+      <ContentContainer>
         <Search />
-        {loading ? <WaveFormLoader /> : content}
+        {loading ? <WaveFormLoader /> : getContent(children, isReady)}
         {shouldShowPagination && <Pagination lastPage={lastPage} />}
-      </Content>
+      </ContentContainer>
     </>
   )
 }

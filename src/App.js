@@ -49,7 +49,7 @@ function App() {
         <Switch>
           <Route path="/originals" component={OriginalsPage} />
           <Route path="/mixtapes" component={MixtapesPage} />
-          {/* <Route path="/videos" component={VideosPage} /> */}
+          <Route path="/videos" component={VideosPage} />
           <Redirect from="" to="/originals" />
         </Switch>
       </ContentContainer>
