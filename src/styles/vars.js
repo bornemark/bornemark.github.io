@@ -6,7 +6,6 @@ const colors = {
   grayLight: '#cccccc',
   primaryFaded: '#adadad',
   grayTransparent: transparentize(0.92, 'black'),
-  brownDarker: '#1c2127',
   brownDark: '#2a2f3a',
   shadowPrimary: 'rgba(0,0,0,0.2)',
   shadowHover: 'rgba(0,0,0,0.04)',
@@ -16,8 +15,13 @@ const colors = {
   whiteTransparent: transparentize(0.992, '#FFF'),
   accent: '#FFDFA5',
   accentTransparent: transparentize(0.75, '#FFDFA5'),
-  green: '#1f231f',
-  purple: '#231e22',
+
+  backgrounds: {
+    blue: '#1a1c1e',
+    purple: '#1d1a1e',
+    green: '#1a1e1a',
+    yellow: '#1e1e1a',
+  },
 }
 
 const shadows = {

@@ -5,20 +5,21 @@ import vars from '../styles/vars'
 export default function useBackgroundColorFromRoute() {
   const { location } = useReactRouter()
   const [backgroundColor, setBackgroundColor] = React.useState(
-    vars.colors.purple,
+    vars.colors.backgrounds.purple,
   )
 
   React.useEffect(() => {
     const getBackgroundColor = () => {
       switch (location.pathname) {
         case '/':
-          return vars.colors.purple
         case '/originals':
-          return vars.colors.green
+          return vars.colors.backgrounds.blue
         case '/mixtapes':
-          return vars.colors.brownDarker
+          return vars.colors.backgrounds.green
+        case '/mashups':
+          return vars.colors.backgrounds.purple
         case '/videos':
-          return vars.colors.green
+          return vars.colors.backgrounds.yellow
         default:
           return 'black'
       }
