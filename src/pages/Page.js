@@ -10,8 +10,8 @@ import { AppContext } from '../AppContext'
 export const Header = styled.header`
   position: relative;
   padding: 4rem;
-  height: 24vh;
-  width: 75vw;
+  height: 27vh;
+  width: 80vw;
 
   &:before {
     content: '';
@@ -23,10 +23,10 @@ export const Header = styled.header`
     width: 100%;
     background-image: linear-gradient(
         90deg,
-        transparent 85%,
+        transparent 55%,
         ${props => props.backgroundColor} 100%
       ),
-      linear-gradient(transparent 0%, ${props => props.backgroundColor} 100%),
+      linear-gradient(transparent 65%, ${props => props.backgroundColor} 100%),
       url('https://i.imgur.com/rrstaTs.png');
     background-position: 50% 65%;
     background-size: cover;
@@ -41,7 +41,7 @@ export const Header = styled.header`
 
 const ContentContainer = styled.section`
   padding: 4rem;
-  margin-top: -3rem;
+  margin-top: -3.5rem;
   max-width: 80rem;
 `
 
