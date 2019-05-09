@@ -4,9 +4,7 @@ import Track from '../components/Track'
 import Page from './Page'
 
 export function MixtapesPage(props) {
-  const [tracksData, loading] = useTracks({
-    filters: { trackType: 2 },
-  })
+  const [tracksData, loading] = useTracks({ filters: { trackType: 2 } })
 
   const renderedTracks = React.useMemo(
     () => tracksData && tracksData.data.map(m => <Track key={m.id} item={m} />),

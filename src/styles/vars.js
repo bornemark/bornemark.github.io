@@ -34,8 +34,8 @@ const typography = {
 }
 
 const mediaPlayers = {
-  soundCloudPlayerHeight: '10rem',
-  youtubePlayerHeight: '250px',
+  soundCloudPlayerHeight: '14rem',
+  youtubePlayerHeight: '224px',
 }
 
 const other = {

@@ -3,7 +3,7 @@ import useFetch from './useFetch'
 import { AppContext } from '../AppContext'
 
 export default function useTracks({
-  filters: { trackType = 1, mediaType = 1 },
+  filters: { trackType, mediaType },
   orderBy: { prop, order } = {},
 }) {
   const {
