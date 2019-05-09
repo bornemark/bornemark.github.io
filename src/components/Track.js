@@ -29,7 +29,7 @@ const Header = styled.header`
 `
 
 const Title = styled.h1`
-  font-size: 1.7em;
+  font-size: 1.4em;
   line-height: 0.9;
   margin: 0;
   font-weight: normal;

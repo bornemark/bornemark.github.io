@@ -4,10 +4,7 @@ import { Route, Redirect, Switch } from 'react-router-dom'
 import { transparentize, darken } from 'polished'
 import Sidebar from './components/Sidebar/Sidebar'
 import vars from './styles/vars'
-import VideosPage from './pages/VideosPage'
-import OriginalsPage from './pages/OriginalsPage'
-import MixtapesPage from './pages/MixtapesPage'
-import useBackgroundColorFromRoute from './services/useBackgroundColorFromRoute'
+import { OriginalsPage, MixtapesPage, MashupsPage, VideosPage } from './pages'
 import { AppContext } from './AppContext'
 
 const sidebarWidth = '20vw'
@@ -49,6 +46,7 @@ function App() {
         <Switch>
           <Route path="/originals" component={OriginalsPage} />
           <Route path="/mixtapes" component={MixtapesPage} />
+          <Route path="/mashups" component={MashupsPage} />
           <Route path="/videos" component={VideosPage} />
           <Redirect from="" to="/originals" />
         </Switch>
