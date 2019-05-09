@@ -2,7 +2,10 @@ import React from 'react'
 import useFetch from './useFetch'
 import { AppContext } from '../AppContext'
 
-export default function useTracks({ trackType = 1, mediaType = 1 }) {
+export default function useTracks({
+  filters: { trackType = 1, mediaType = 1 },
+  orderBy: { prop, order } = {},
+}) {
   const {
     state: { pageNumber, searchTerm },
   } = React.useContext(AppContext)
@@ -15,9 +18,10 @@ export default function useTracks({ trackType = 1, mediaType = 1 }) {
         body: {
           page: pageNumber,
           filters: { trackType, mediaType, title: searchTerm },
+          orderBy: { prop, order },
         },
       }),
-      [mediaType, pageNumber, searchTerm, trackType],
+      [mediaType, order, pageNumber, prop, searchTerm, trackType],
     ),
   })
 }

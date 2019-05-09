@@ -3,8 +3,8 @@ import useTracks from '../services/useTracks'
 import Track from '../components/Track'
 import Page from './Page'
 
-export default function VideosPage(props) {
-  const [tracksData, loading] = useTracks({ mediaType: 2 })
+export function VideosPage(props) {
+  const [tracksData, loading] = useTracks({ filters: { mediaType: 2 } })
 
   const renderedTracks = React.useMemo(
     () => tracksData && tracksData.data.map(m => <Track key={m.id} item={m} />),

@@ -3,8 +3,8 @@ import useTracks from '../services/useTracks'
 import Track from '../components/Track'
 import Page from './Page'
 
-export default function OriginalsPage(props) {
-  const [tracksData, loading] = useTracks({ trackType: 1 })
+export function OriginalsPage(props) {
+  const [tracksData, loading] = useTracks({ filters: { trackType: 1 } })
 
   const renderedTracks = React.useMemo(
     () => tracksData && tracksData.data.map(m => <Track key={m.id} item={m} />),
