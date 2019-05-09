@@ -5,7 +5,21 @@ import ThreeDotsLoader from '../../icons/ThreeDotsLoader'
 import vars from '../../styles/vars'
 import './youtube.css'
 
-export default function YoutubePlayer({ youtubeTrackId, isReady }) {
+const YouTubePlayerPlaceholder = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: ${props => (props.ready ? 'none' : 'flex')};
+  align-items: center;
+  justify-content: center;
+  background-color: ${vars.colors.whiteTransparent};
+`
+
+export default function YoutubePlayer({ youtubeTrackId }) {
+  const [ready, setReady] = React.useState(false)
+
   const opts = {
     height: vars.mediaPlayers.youtubePlayerHeight,
     width: '100%',
@@ -15,11 +29,23 @@ export default function YoutubePlayer({ youtubeTrackId, isReady }) {
     },
   }
 
+  const onReady = () => {
+    console.log('yup')
+    setReady(true)
+  }
+
   return (
-    <YouTube
-      videoId={youtubeTrackId}
-      opts={opts}
-      containerClassName="youtube-container"
-    />
+    <>
+      <YouTubePlayerPlaceholder ready={ready}>
+        <ThreeDotsLoader />
+      </YouTubePlayerPlaceholder>
+
+      <YouTube
+        videoId={youtubeTrackId}
+        opts={opts}
+        containerClassName="youtube-container"
+        onReady={onReady}
+      />
+    </>
   )
 }

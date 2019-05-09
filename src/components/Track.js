@@ -33,6 +33,7 @@ const Title = styled.h1`
   line-height: 0.9;
   margin: 0;
   font-weight: normal;
+  line-height: 2rem;
 `
 
 const Footer = styled.figcaption`
@@ -51,6 +52,11 @@ const Footer = styled.figcaption`
 const FooterText = styled.p`
   font-size: 0.9em;
   margin: 0;
+`
+
+const MediaPlayerContainer = styled.div`
+  position: relative;
+  width: 100%;
 `
 
 export default function Track({
@@ -84,7 +90,7 @@ export default function Track({
           </Header>
 
           {/* SC or YT */}
-          {mediaPlayer}
+          <MediaPlayerContainer>{mediaPlayer}</MediaPlayerContainer>
 
           <Footer>
             <FooterText>{formattedCreatedAtDate}</FooterText>

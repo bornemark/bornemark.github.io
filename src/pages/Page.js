@@ -61,10 +61,10 @@ export default function Page({ title, children, loading, tracksData }) {
   const {
     state: { backgroundColor },
   } = React.useContext(AppContext)
-  const [isReady, setIsReady] = React.useState(false)
+  const [ready, setReady] = React.useState(false)
 
   React.useEffect(() => {
-    setIsReady(true)
+    setReady(true)
   }, [])
 
   const shouldShowPagination =
@@ -79,7 +79,7 @@ export default function Page({ title, children, loading, tracksData }) {
 
       <ContentContainer>
         <Search />
-        {loading ? <WaveFormLoader /> : getContent(children, isReady)}
+        {loading ? <WaveFormLoader /> : getContent(children, ready)}
         {shouldShowPagination && <Pagination lastPage={lastPage} />}
       </ContentContainer>
     </>

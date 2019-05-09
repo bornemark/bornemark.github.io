@@ -10,22 +10,21 @@ const SoundCloudPlayerPlaceholder = styled.div`
   align-items: center;
   justify-content: center;
   background-color: ${vars.colors.whiteTransparent};
-  border-radius: ${vars.other.borderRadiusPrimary};
 `
 
 export default function SoundCloudPlayer({ soundCloudTrackId }) {
-  const [isReady, setIsReady] = React.useState(false)
+  const [ready, setReady] = React.useState(false)
   React.useEffect(() => {
     /* global SC */
     const player = SC.Widget(document.getElementById('sc-widget'))
     player.bind(SC.Widget.Events.READY, () => {
-      setIsReady(true)
+      setReady(true)
     })
   }, [])
 
   return (
     <>
-      <SoundCloudPlayerPlaceholder isReady={isReady}>
+      <SoundCloudPlayerPlaceholder isReady={ready}>
         <ThreeDotsLoader />
       </SoundCloudPlayerPlaceholder>
 
@@ -35,7 +34,7 @@ export default function SoundCloudPlayer({ soundCloudTrackId }) {
         scrolling="no"
         frameBorder="no"
         style={{
-          display: isReady ? 'flex' : 'none',
+          display: ready ? 'flex' : 'none',
           width: '100%',
           height: vars.mediaPlayers.soundCloudPlayerHeight,
         }}
