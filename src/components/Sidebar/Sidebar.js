@@ -56,6 +56,9 @@ export default function Sidebar() {
           <StyledNavLink to="/originals">Originals</StyledNavLink>
         </ListItem>
         <ListItem>
+          <StyledNavLink to="/remixes">Remixes</StyledNavLink>
+        </ListItem>
+        <ListItem>
           <StyledNavLink to="/mixtapes">Mixtapes</StyledNavLink>
         </ListItem>
         <ListItem>

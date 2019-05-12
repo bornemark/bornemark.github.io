@@ -14,6 +14,8 @@ export default function useBackgroundColorFromRoute() {
         case '/':
         case '/originals':
           return vars.colors.backgrounds.blue
+        case '/remixes':
+          return vars.colors.backgrounds.orange
         case '/mixtapes':
           return vars.colors.backgrounds.green
         case '/mashups':

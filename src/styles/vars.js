@@ -18,6 +18,7 @@ const colors = {
 
   backgrounds: {
     blue: '#1a1c1e',
+    orange: '#201c19',
     purple: '#1d1a1e',
     green: '#1a1e1a',
     yellow: '#1e1e1a',
