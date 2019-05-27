@@ -5,13 +5,30 @@ import H1 from '../components/primitives/H1'
 import Pagination from '../components/Pagination'
 import Search from '../components/Search'
 import Grid from '../components/primitives/Grid'
+import vars from '../styles/vars'
 import { AppContext } from '../AppContext'
 
-export const Header = styled.header`
+const Header = styled.header`
   position: relative;
   padding: 4rem;
   height: 27vh;
   width: 78vw;
+
+  h1 {
+    line-height: 0.8;
+  }
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    width: 100vw;
+    padding: 3rem;
+  }
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    padding: 2.2rem 1.5rem;
+    h1 {
+      font-size: 2.3rem;
+    }
+  }
 
   &:before {
     content: '';
@@ -40,9 +57,20 @@ export const Header = styled.header`
 `
 
 const ContentContainer = styled.section`
+  display: flex;
+  flex-direction: column;
   padding: 4rem;
   margin-top: -3.5rem;
   max-width: 80rem;
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    padding: 2rem;
+  }
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    padding: 1rem;
+    margin-top: -2rem;
+  }
 `
 
 const NoContent = styled.p`

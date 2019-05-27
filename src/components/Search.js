@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Search as SearchIcon } from 'styled-icons/fa-solid/Search'
+import { isBrowser } from 'react-device-detect'
 import vars from '../styles/vars'
 import useDebounce from '../services/useDebounce'
 import { AppContext } from '../AppContext'
@@ -13,6 +14,11 @@ const Container = styled.div`
   background-color: ${vars.colors.grayTransparent};
   border-radius: ${vars.other.borderRadiusPrimary};
   max-width: 100%;
+  z-index: 1;
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    margin-bottom: 2rem;
+  }
 `
 
 const StyledSearchIcon = styled(SearchIcon)`
@@ -33,7 +39,10 @@ const Input = styled.input`
 
 export default function Search() {
   const [searchTerm, setSearchTerm] = React.useState('')
-  const { dispatch } = React.useContext(AppContext)
+  const {
+    state: { showMobileMenu },
+    dispatch,
+  } = React.useContext(AppContext)
   const debouncedSearchTerm = useDebounce(searchTerm, 500)
 
   React.useEffect(() => {
@@ -46,7 +55,7 @@ export default function Search() {
       <Input
         value={searchTerm}
         onChange={e => setSearchTerm(e.target.value)}
-        autoFocus
+        autoFocus={isBrowser && !showMobileMenu}
       />
     </Container>
   )

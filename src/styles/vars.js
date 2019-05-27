@@ -5,7 +5,7 @@ const colors = {
   grayDark: '#1b1b1b',
   grayLight: '#cccccc',
   primaryFaded: '#adadad',
-  grayTransparent: transparentize(0.92, 'black'),
+  grayTransparent: transparentize(0.99, 'white'),
   brownDark: '#2a2f3a',
   shadowPrimary: 'rgba(0,0,0,0.2)',
   shadowHover: 'rgba(0,0,0,0.04)',
@@ -44,10 +44,16 @@ const other = {
   debounceTime: 250,
 }
 
+const breakpoints = {
+  tablet: '1000px',
+  mobile: '660px',
+}
+
 export default {
   colors,
   shadows,
   typography,
   mediaPlayers,
   other,
+  breakpoints,
 }

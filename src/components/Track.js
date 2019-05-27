@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
 import vars from '../styles/vars'
@@ -30,10 +30,19 @@ const Header = styled.header`
 
 const Title = styled.h1`
   font-size: 1.4em;
-  line-height: 0.9;
   margin: 0;
   font-weight: normal;
   line-height: 2rem;
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    font-size: 1.3em;
+    line-height: 1.5rem;
+  }
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    font-size: 1.1em;
+    line-height: 1rem;
+  }
 `
 
 const Footer = styled.figcaption`
@@ -52,6 +61,7 @@ const Footer = styled.figcaption`
 const FooterText = styled.p`
   font-size: 0.9em;
   margin: 0;
+  text-transform: capitalize;
 `
 
 const MediaPlayerContainer = styled.div`
@@ -62,13 +72,12 @@ const MediaPlayerContainer = styled.div`
 export default function Track({
   item: { title, soundcloudId, youtubeId, created_at },
 }) {
-  const formattedCreatedAtDate = new Date(created_at).toLocaleDateString(
-    'se-SV',
-    {
-      year: 'numeric',
-      month: 'long',
-    },
-  )
+  const formattedCreatedAtDate = new Date(
+    created_at.replace(' ', 'T'),
+  ).toLocaleDateString('en-GB', {
+    year: 'numeric',
+    month: 'long',
+  })
 
   const transitionStyles = {
     entering: { opacity: 0 },

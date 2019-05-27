@@ -6,6 +6,7 @@ export const initialAppState = {
   lastPage: 1,
   searchTerm: '',
   backgroundColor: 'black',
+  showMobileMenu: false,
 }
 
 export function reducer(appState, action) {
@@ -30,6 +31,16 @@ export function reducer(appState, action) {
       return {
         ...appState,
         backgroundColor: action.backgroundColor,
+      }
+    case 'TOGGLE_SHOW_MOBILE_MENU':
+      return {
+        ...appState,
+        showMobileMenu: !appState.showMobileMenu,
+      }
+    case 'HIDE_MOBILE_MENU':
+      return {
+        ...appState,
+        showMobileMenu: false,
       }
     default:
       return appState

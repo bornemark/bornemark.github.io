@@ -5,12 +5,14 @@ import { AppContext } from '../AppContext'
 import useDebounce from '../services/useDebounce'
 
 const Container = styled.nav`
-  display: flex;
-  flex-wrap: nowrap;
   margin-top: 3rem;
 
   > button:not(:last-child) {
     margin-right: 0.5rem;
+  }
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    margin: auto;
   }
 `
 

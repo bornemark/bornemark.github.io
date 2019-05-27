@@ -14,6 +14,10 @@ const StyledLogo = styled(Logo)`
   max-width: 12rem;
   opacity: 0.75;
   margin: auto;
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    max-width: 9.5rem;
+  }
 `
 
 const List = styled.ul`
@@ -26,6 +30,23 @@ const List = styled.ul`
   > li:not(:last-child) {
     margin-bottom: 0.5rem;
   }
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    margin: auto 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    > li:not(:last-child) {
+      margin-bottom: 3vh;
+    }
+  }
 `
 
 const ListItem = styled.li`
@@ -35,6 +56,11 @@ const ListItem = styled.li`
   height: 2.7rem;
   font-family: ${vars.typography.primary};
   text-transform: lowercase;
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    font-size: 1.8em;
+    display: block;
+  }
 `
 
 const StyledNavLink = styled(NavLink)`
