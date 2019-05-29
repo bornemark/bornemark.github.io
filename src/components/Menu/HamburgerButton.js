@@ -19,6 +19,7 @@ const StyledHamburgerButton = styled.button`
   z-index: 99999;
   display: none;
   touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 
   @media (max-width: ${vars.breakpoints.tablet}) {
     display: block;
