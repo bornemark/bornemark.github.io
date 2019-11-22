@@ -30,7 +30,6 @@ export default function YoutubePlayer({ youtubeTrackId }) {
   }
 
   const onReady = () => {
-    console.log('yup')
     setReady(true)
   }
 

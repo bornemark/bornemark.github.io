@@ -17,14 +17,14 @@ const Container = styled.nav`
 `
 
 const Button = styled.button`
-  height: 1.9rem;
-  min-width: 1.9rem;
+  height: 2rem;
+  min-width: 2rem;
   background: ${vars.colors.grayTransparent};
   border: 2px solid ${vars.colors.accentTransparent};
   border-radius: ${vars.other.borderRadiusPrimary};
   padding: 0 0.5rem;
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 1em;
   outline: none;
   background-color: ${props => (props.active ? vars.colors.accent : 'none')};
   color: ${props =>
@@ -38,7 +38,7 @@ const Button = styled.button`
   }
 
   &:disabled {
-    opacity: 0.4;
+    opacity: 0.3;
     cursor: default;
   }
 `
@@ -78,38 +78,62 @@ function Pagination({ lastPage }) {
   return (
     <Container>
       {/* First */}
-      <IconButton onClick={goToFirst} disabled={pageNumber === 1}>
+      <IconButton
+        onClick={goToFirst}
+        disabled={pageNumber === 1}
+        title="Go to first page"
+      >
         «
       </IconButton>
       {/* Before */}
-      <IconButton onClick={goOneBack} disabled={pageNumber - 1 === 0}>
+      <IconButton
+        onClick={goOneBack}
+        disabled={pageNumber - 1 === 0}
+        title="Go to previous page"
+      >
         ‹
       </IconButton>
       {/* -2 */}
       {pageNumber - 2 >= 1 && (
-        <Button onClick={goTwoBack}>{pageNumber - 2}</Button>
+        <Button onClick={goTwoBack} title={`Go to page ${pageNumber - 2}`}>
+          {pageNumber - 2}
+        </Button>
       )}
       {/* -1 */}
       {pageNumber - 1 >= 1 && (
-        <Button onClick={goOneBack}>{pageNumber - 1}</Button>
+        <Button onClick={goOneBack} title={`Go to page ${pageNumber - 1}`}>
+          {pageNumber - 1}
+        </Button>
       )}
       {/* Current */}
       <Button active>{pageNumber}</Button>
       {/* +1 */}
       {pageNumber + 1 <= lastPage && (
-        <Button onClick={goOneAhead}>{pageNumber + 1}</Button>
+        <Button onClick={goOneAhead} title={`Go to page ${pageNumber + 1}`}>
+          {pageNumber + 1}
+        </Button>
       )}
       {/* +2 */}
       {pageNumber + 2 <= lastPage && (
-        <Button onClick={goTwoAhead}>{pageNumber + 2}</Button>
+        <Button onClick={goTwoAhead} title={`Go to page ${pageNumber + 2}`}>
+          {pageNumber + 2}
+        </Button>
       )}
       {/* Next */}
-      <IconButton onClick={goOneAhead} disabled={pageNumber + 1 > lastPage}>
+      <IconButton
+        onClick={goOneAhead}
+        disabled={pageNumber + 1 > lastPage}
+        title="Next page"
+      >
         ›
       </IconButton>
       {/* Last */}
 
-      <IconButton onClick={goToLast} disabled={pageNumber + 1 > lastPage}>
+      <IconButton
+        onClick={goToLast}
+        disabled={pageNumber + 1 > lastPage}
+        title="Last page"
+      >
         »
       </IconButton>
     </Container>

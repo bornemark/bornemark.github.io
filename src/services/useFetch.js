@@ -5,7 +5,7 @@ const defaultOptions = {
 }
 
 export default function useFetch({ url, options: userOptions }) {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [data, setData] = useState(null)
 
   useEffect(() => {

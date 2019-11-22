@@ -1,12 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import WaveFormLoader from '../icons/WaveFormLoader'
-import H1 from '../components/primitives/H1'
-import Pagination from '../components/Pagination'
-import Search from '../components/Search'
-import Grid from '../components/primitives/Grid'
-import vars from '../styles/vars'
-import { AppContext } from '../AppContext'
+import H1 from './H1'
+import { AppContext } from '../../AppContext'
+import vars from '../../styles/vars'
+import Search from '../Search'
 
 const Header = styled.header`
   position: relative;
@@ -73,31 +70,10 @@ const ContentContainer = styled.section`
   }
 `
 
-const NoContent = styled.p`
-  font-size: 2em;
-`
-
-const getContent = (children, isReady) => {
-  if (!children || !children.length) {
-    return isReady ? <NoContent>🤷‍♂️</NoContent> : null
-  }
-
-  return <Grid>{children}</Grid>
-}
-
-export default function Page({ title, children, loading, tracksData }) {
+export default function LayoutPage({ title, children }) {
   const {
     state: { backgroundColor },
   } = React.useContext(AppContext)
-  const [ready, setReady] = React.useState(false)
-
-  React.useEffect(() => {
-    setReady(true)
-  }, [])
-
-  const shouldShowPagination =
-    tracksData && parseInt(tracksData.total) > tracksData.perPage
-  const lastPage = tracksData && tracksData.lastPage
 
   return (
     <>
@@ -107,8 +83,7 @@ export default function Page({ title, children, loading, tracksData }) {
 
       <ContentContainer>
         <Search />
-        {loading ? <WaveFormLoader /> : getContent(children, ready)}
-        {shouldShowPagination && <Pagination lastPage={lastPage} />}
+        {children}
       </ContentContainer>
     </>
   )

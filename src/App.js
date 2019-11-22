@@ -1,19 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Route, Redirect, Switch } from 'react-router-dom'
-import { transparentize, darken } from 'polished'
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock'
-import Menu from './components/Menu/Menu'
-import vars from './styles/vars'
-import {
-  OriginalsPage,
-  MixtapesPage,
-  MashupsPage,
-  VideosPage,
-  RemixesPage,
-} from './pages'
+import { darken, transparentize } from 'polished'
+import React from 'react'
+import { Redirect, Route, Switch } from 'react-router-dom'
+import styled from 'styled-components'
 import { AppContext } from './AppContext'
 import { HamburgerButton } from './components/Menu/HamburgerButton'
+import Menu from './components/Menu/Menu'
+import Tracks from './components/Tracks'
+import routes from './routes'
+import vars from './styles/vars'
 
 const menuContainerWidth = '20vw'
 
@@ -80,11 +75,13 @@ function App() {
 
       <ContentContainer>
         <Switch>
-          <Route path="/originals" component={OriginalsPage} />
-          <Route path="/remixes" component={RemixesPage} />
-          <Route path="/mixtapes" component={MixtapesPage} />
-          <Route path="/mashups" component={MashupsPage} />
-          <Route path="/videos" component={VideosPage} />
+          {routes.map(({ path, title, filters }) => (
+            <Route
+              path={path}
+              render={() => <Tracks title={title} filters={filters} />}
+              key={path}
+            />
+          ))}
           <Redirect from="" to="/originals" />
         </Switch>
       </ContentContainer>

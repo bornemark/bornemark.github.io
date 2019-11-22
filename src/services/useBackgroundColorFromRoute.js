@@ -10,7 +10,11 @@ export default function useBackgroundColorFromRoute() {
 
   React.useEffect(() => {
     const getBackgroundColor = () => {
-      switch (location.pathname) {
+      const pathName = location.pathname
+        .split('/')
+        .slice(0, 2)
+        .join('/')
+      switch (pathName) {
         case '/':
         case '/originals':
           return vars.colors.backgrounds.blue
