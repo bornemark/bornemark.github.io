@@ -20,6 +20,8 @@ export default function SoundCloudPlayer({ soundCloudTrackId }) {
     player.bind(SC.Widget.Events.READY, () => {
       setReady(true)
     })
+
+    return player.unbind(SC.Widget.Events.READY)
   }, [])
 
   return (

@@ -3,7 +3,7 @@ import useFetch from './useFetch'
 import { AppContext } from '../AppContext'
 
 export default function useTracks({
-  filters: { trackType, mediaType },
+  filters: { trackType, mediaType, slug } = {},
   orderBy: { prop, order } = {},
 }) {
   const {
@@ -17,11 +17,11 @@ export default function useTracks({
         method: 'POST',
         body: {
           page: pageNumber,
-          filters: { trackType, mediaType, title: searchTerm },
+          filters: { trackType, mediaType, slug, title: searchTerm },
           orderBy: { prop, order },
         },
       }),
-      [mediaType, order, pageNumber, prop, searchTerm, trackType],
+      [mediaType, order, pageNumber, prop, searchTerm, slug, trackType],
     ),
   })
 }

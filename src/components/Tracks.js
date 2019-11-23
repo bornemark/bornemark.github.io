@@ -23,9 +23,15 @@ export default function Tracks({ title, filters }) {
     filters: slug ? { slug } : filters,
   })
 
+  const isOnDetails = slug && tracksData && tracksData.data.length === 1
+
   const tracks = React.useMemo(
-    () => tracksData && tracksData.data.map(item => <Track item={item} />),
-    [tracksData],
+    () =>
+      tracksData &&
+      tracksData.data.map(item => (
+        <Track item={item} isOnDetails={isOnDetails} />
+      )),
+    [isOnDetails, tracksData],
   )
 
   const hasNoData = tracksData && parseInt(tracksData.total) === 0
@@ -49,7 +55,7 @@ export default function Tracks({ title, filters }) {
             </Grid>
           )}
 
-          {tracks.length === 1 && slug && tracks[0]}
+          {isOnDetails && tracks[0]}
         </>
       )}
 

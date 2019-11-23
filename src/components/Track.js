@@ -1,13 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import Transition from 'react-transition-group/Transition'
+import { Link } from 'react-router-dom'
 import vars from '../styles/vars'
 import SoundCloudPlayer from './mediaPlayers/SoundCloudPlayer'
 import YoutubePlayer from './mediaPlayers/YoutubePlayer'
+import useTrackType from '../services/useTrackType'
 
 const ANIMATION_APPEAR_DURATION = 250
 
-const Container = styled.li`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,8 +26,13 @@ const Header = styled.header`
   align-items: flex-end;
   flex-wrap: nowrap;
   margin-bottom: 0.8rem;
-  color: ${vars.colors.white};
   width: 100%;
+  color: ${vars.colors.white};
+`
+
+const TitleLink = styled(Link)`
+  text-decoration: none;
+  color: ${vars.colors.white};
 `
 
 const Title = styled.h1`
@@ -70,7 +77,8 @@ const MediaPlayerContainer = styled.div`
 `
 
 export default function Track({
-  item: { title, soundcloudId, youtubeId, created_at },
+  item: { title, soundcloudId, youtubeId, created_at, slug, trackType },
+  isOnDetails,
 }) {
   const formattedCreatedAtDate = new Date(
     created_at.replace(' ', 'T'),
@@ -90,12 +98,20 @@ export default function Track({
     <YoutubePlayer youtubeTrackId={youtubeId} />
   )
 
+  const parentPath = useTrackType(trackType)
+
   return (
     <Transition in appear timeout={ANIMATION_APPEAR_DURATION}>
       {state => (
         <Container style={{ ...transitionStyles[state] }}>
           <Header>
-            <Title>{title}</Title>
+            {!isOnDetails && slug ? (
+              <TitleLink to={`${parentPath}/${slug}`}>
+                <Title>{title}</Title>
+              </TitleLink>
+            ) : (
+              <Title>{title}</Title>
+            )}
           </Header>
 
           {/* SC or YT */}
