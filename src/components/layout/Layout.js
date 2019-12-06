@@ -7,12 +7,12 @@ import Search from '../Search'
 
 const Header = styled.header`
   position: relative;
-  padding: 5.2rem;
+  padding: 4.6rem;
   height: 27vh;
   width: 78vw;
 
   h1 {
-    line-height: 0.8;
+    padding-right: 3rem;
   }
 
   @media (max-width: ${vars.breakpoints.tablet}) {
@@ -21,7 +21,7 @@ const Header = styled.header`
   }
 
   @media (max-width: ${vars.breakpoints.mobile}) {
-    padding: 2.2rem 1.5rem;
+    padding: 1rem 1.5rem;
     h1 {
       font-size: 2.3rem;
     }
@@ -57,7 +57,6 @@ const ContentContainer = styled.section`
   display: flex;
   flex-direction: column;
   padding: 4rem;
-  margin-top: -3.5rem;
   max-width: 80rem;
 
   @media (max-width: ${vars.breakpoints.tablet}) {

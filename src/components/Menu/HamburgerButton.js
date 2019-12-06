@@ -23,16 +23,25 @@ const StyledButton = styled.button`
   @media (max-width: ${vars.breakpoints.tablet}) {
     display: block;
   }
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    padding: 2rem 1.8rem;
+  }
 `
 
 const StyledIcon = styled.linearGradient`
+  --icon-size: 2.2rem;
   color: ${vars.colors.accent};
-  height: 2.2rem;
-  width: 2.2rem;
+  height: var(--icon-size);
+  width: var(--icon-size);
 
   > svg {
-    width: 2.2rem;
-    height: 2.2rem;
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  @media (max-width: ${vars.breakpoints.mobile}) {
+    --icon-size: 1.9rem;
   }
 `
 
