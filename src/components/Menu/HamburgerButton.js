@@ -7,10 +7,9 @@ import { isBrowser } from 'react-device-detect'
 import { AppContext } from '../../AppContext'
 import vars from '../../styles/vars'
 
-const StyledHamburgerButton = styled.button`
+const StyledButton = styled.button`
   cursor: pointer;
   position: ${props => (props.showMobileMenu ? 'fixed' : 'absolute')};
-  top: 0.55rem;
   right: 0;
   background: none;
   outline: none;
@@ -61,13 +60,13 @@ export function HamburgerButton() {
   })
 
   return (
-    <StyledHamburgerButton
+    <StyledButton
       id="hamburger-button"
       showMobileMenu={showMobileMenu}
       // Use regular onClick if we're on desktop
       onClick={isBrowser && toggleShowMobileMenu}
     >
       <StyledIcon as={showMobileMenu ? XIcon : ThreeBarsIcon} />
-    </StyledHamburgerButton>
+    </StyledButton>
   )
 }

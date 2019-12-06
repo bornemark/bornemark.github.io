@@ -7,7 +7,7 @@ import Search from '../Search'
 
 const Header = styled.header`
   position: relative;
-  padding: 4rem;
+  padding: 5.2rem;
   height: 27vh;
   width: 78vw;
 
