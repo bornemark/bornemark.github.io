@@ -13,11 +13,6 @@ const NoContent = styled.p`
 `
 
 export default function Tracks({ title, filters }) {
-  const [ready, setReady] = React.useState(false)
-  React.useEffect(() => {
-    setReady(true)
-  }, [])
-
   const { slug } = useParams()
   const [tracksData, loading] = useTracks({
     filters: slug ? { slug } : filters,
@@ -25,16 +20,18 @@ export default function Tracks({ title, filters }) {
 
   const isOnDetails = slug && tracksData && tracksData.data.length === 1
 
-  const tracks = React.useMemo(
+  const listItems = React.useMemo(
     () =>
       tracksData &&
-      tracksData.data.map(item => (
-        <Track item={item} isOnDetails={isOnDetails} />
+      tracksData.data.map((item, i) => (
+        <li key={i}>
+          <Track item={item} isOnDetails={isOnDetails} />
+        </li>
       )),
     [isOnDetails, tracksData],
   )
 
-  const hasNoData = tracksData && parseInt(tracksData.total) === 0
+  const hasData = tracksData && parseInt(tracksData.total) !== 0
   const pageTitle = slug
     ? tracksData && tracksData.data[0] && tracksData.data[0].title
     : title
@@ -43,23 +40,15 @@ export default function Tracks({ title, filters }) {
     <Layout title={pageTitle}>
       {loading ? (
         <WaveFormLoader />
-      ) : hasNoData ? (
-        ready && <NoContent>🤷‍♂️</NoContent>
+      ) : !hasData ? (
+        <NoContent>🤷‍♂️</NoContent>
+      ) : isOnDetails ? (
+        <Track item={tracksData.data[0]} isOnDetails />
       ) : (
-        <>
-          {tracks.length > 0 && !slug && (
-            <Grid>
-              {tracks.map((track, i) => (
-                <li key={i}>{track}</li>
-              ))}
-            </Grid>
-          )}
-
-          {isOnDetails && tracks[0]}
-        </>
+        <Grid>{listItems}</Grid>
       )}
 
-      {tracksData && parseInt(tracksData.total) > tracksData.perPage && (
+      {hasData && tracksData.total > tracksData.perPage && (
         <Pagination lastPage={tracksData.lastPage} />
       )}
     </Layout>
