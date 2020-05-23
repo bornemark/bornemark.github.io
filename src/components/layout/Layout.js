@@ -17,13 +17,14 @@ const Header = styled.header`
   @media (max-width: ${vars.breakpoints.tablet}) {
     width: 100vw;
     padding: 3rem;
+    h1 {
+      font-size: 2rem;
+      line-height: 1.3;
+    }
   }
 
   @media (max-width: ${vars.breakpoints.mobile}) {
-    padding: 1rem 1.5rem;
-    h1 {
-      font-size: 2.3rem;
-    }
+    padding: 1.5rem 1.5rem;
   }
 
   &:before {

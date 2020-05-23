@@ -42,13 +42,13 @@ const Title = styled.h1`
   line-height: 2rem;
 
   @media (max-width: ${vars.breakpoints.tablet}) {
-    font-size: 1.3em;
+    font-size: 1.15em;
     line-height: 1.5rem;
   }
 
   @media (max-width: ${vars.breakpoints.mobile}) {
-    font-size: 1.1em;
-    line-height: 1rem;
+    font-size: 1em;
+    line-height: 1.2rem;
   }
 `
 

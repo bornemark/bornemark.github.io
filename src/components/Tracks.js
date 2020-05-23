@@ -33,12 +33,9 @@ export default function Tracks({ title, filters }) {
   )
 
   const hasData = tracksData && parseInt(tracksData.total) !== 0
-  const pageTitle = slug
-    ? tracksData && tracksData.data[0] && tracksData.data[0].title
-    : title
 
   return (
-    <Layout title={pageTitle}>
+    <Layout title={title}>
       {!onDetails && <Search />}
 
       {loading ? (
