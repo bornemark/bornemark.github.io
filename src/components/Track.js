@@ -74,11 +74,16 @@ const FooterText = styled.p`
 const MediaPlayerContainer = styled.div`
   position: relative;
   width: 100%;
+  height: ${props => (props.onDetails ? '500px' : '100%')};
+
+  @media (max-width: ${vars.breakpoints.tablet}) {
+    height: ${props => (props.onDetails ? '35vh' : '100%')};
+  }
 `
 
 export default function Track({
   item: { title, soundcloudId, youtubeId, created_at, slug, trackType },
-  isOnDetails,
+  onDetails,
 }) {
   const formattedCreatedAtDate = new Date(
     created_at.replace(' ', 'T'),
@@ -95,7 +100,7 @@ export default function Track({
   const mediaPlayer = soundcloudId ? (
     <SoundCloudPlayer soundCloudTrackId={soundcloudId} />
   ) : (
-    <YoutubePlayer youtubeTrackId={youtubeId} />
+    <YoutubePlayer youtubeTrackId={youtubeId} onDetails={onDetails} />
   )
 
   const parentPath = useTrackType(trackType)
@@ -105,7 +110,7 @@ export default function Track({
       {state => (
         <Container style={{ ...transitionStyles[state] }}>
           <Header>
-            {!isOnDetails && slug ? (
+            {!onDetails && slug ? (
               <TitleLink to={`${parentPath}/${slug}`}>
                 <Title>{title}</Title>
               </TitleLink>
@@ -115,7 +120,9 @@ export default function Track({
           </Header>
 
           {/* SC or YT */}
-          <MediaPlayerContainer>{mediaPlayer}</MediaPlayerContainer>
+          <MediaPlayerContainer onDetails={onDetails}>
+            {mediaPlayer}
+          </MediaPlayerContainer>
 
           <Footer>
             <FooterText>{formattedCreatedAtDate}</FooterText>

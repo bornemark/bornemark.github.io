@@ -19,17 +19,17 @@ export default function Tracks({ title, filters }) {
     filters: slug ? { slug } : filters,
   })
 
-  const isOnDetails = slug && tracksData && tracksData.data.length === 1
+  const onDetails = slug && tracksData && tracksData.data.length === 1
 
   const listItems = React.useMemo(
     () =>
       tracksData &&
       tracksData.data.map((item, i) => (
         <li key={i}>
-          <Track item={item} isOnDetails={isOnDetails} />
+          <Track item={item} onDetails={onDetails} />
         </li>
       )),
-    [isOnDetails, tracksData],
+    [onDetails, tracksData],
   )
 
   const hasData = tracksData && parseInt(tracksData.total) !== 0
@@ -39,14 +39,14 @@ export default function Tracks({ title, filters }) {
 
   return (
     <Layout title={pageTitle}>
-      {!isOnDetails && <Search />}
+      {!onDetails && <Search />}
 
       {loading ? (
         <WaveFormLoader />
       ) : !hasData ? (
         <NoContent>🤷‍♂️</NoContent>
-      ) : isOnDetails ? (
-        <Track item={tracksData.data[0]} isOnDetails />
+      ) : onDetails ? (
+        <Track item={tracksData.data[0]} onDetails />
       ) : (
         <Grid>{listItems}</Grid>
       )}

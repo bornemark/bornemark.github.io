@@ -17,11 +17,11 @@ const YouTubePlayerPlaceholder = styled.div`
   background-color: ${vars.colors.whiteTransparent};
 `
 
-export default function YoutubePlayer({ youtubeTrackId }) {
+export default function YoutubePlayer({ youtubeTrackId, onDetails }) {
   const [ready, setReady] = React.useState(false)
 
   const opts = {
-    height: vars.mediaPlayers.youtubePlayerHeight,
+    height: onDetails ? '100%' : vars.mediaPlayers.youtubePlayerHeight,
     width: '100%',
     playerVars: {
       // https://developers.google.com/youtube/player_parameters
