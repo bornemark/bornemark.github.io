@@ -7,6 +7,7 @@ import useTracks from '../services/useTracks'
 import Track from './Track'
 import WaveFormLoader from '../icons/WaveFormLoader'
 import Pagination from './Pagination'
+import Search from './Search'
 
 const NoContent = styled.p`
   font-size: 2em;
@@ -38,6 +39,8 @@ export default function Tracks({ title, filters }) {
 
   return (
     <Layout title={pageTitle}>
+      {!isOnDetails && <Search />}
+
       {loading ? (
         <WaveFormLoader />
       ) : !hasData ? (

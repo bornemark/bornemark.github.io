@@ -5,7 +5,7 @@ const colors = {
   grayDark: '#1b1b1b',
   grayLight: '#cccccc',
   primaryFaded: '#adadad',
-  grayTransparent: transparentize(0.985, 'white'),
+  grayTransparent: transparentize(0.93, 'white'),
   brownDark: '#2a2f3a',
   shadowPrimary: 'rgba(0,0,0,0.2)',
   shadowHover: 'rgba(0,0,0,0.04)',

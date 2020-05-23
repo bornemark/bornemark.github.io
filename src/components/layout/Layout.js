@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import H1 from './H1'
 import { AppContext } from '../../AppContext'
 import vars from '../../styles/vars'
-import Search from '../Search'
 
 const Header = styled.header`
   position: relative;
@@ -80,10 +79,7 @@ export default function LayoutPage({ title, children }) {
         <H1>{title}</H1>
       </Header>
 
-      <ContentContainer>
-        <Search />
-        {children}
-      </ContentContainer>
+      <ContentContainer>{children}</ContentContainer>
     </>
   )
 }
